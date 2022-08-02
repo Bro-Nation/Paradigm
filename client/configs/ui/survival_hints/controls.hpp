@@ -12,7 +12,7 @@ class para_RscSurvivalCard: para_RscControlsGroupNoScrollbarHV
 		class Background: para_RscPicture
 		{
 			idc = -1;
-			text = "\vn\ui_f_vietnam\ui\backgrounds\survival_card.paa";
+			text = "ui\backgrounds\survival_card.paa";
 			colorText[] = {1,1,1,1};
 			x = UIW(-2);
 			y = 0;

@@ -62,7 +62,7 @@ class para_RscStructuredText
 	w = UIW(15.5);
 	h = UIH(0.9);
 	
-	colorText[] = {0.1,0.1,0.1,0.9};
+	colorText[] = {1,1,1,0.9};
 	colorBackground[] = {0,0,0,0};
 	shadow = 0;
 	size = TXT_M;
@@ -72,7 +72,7 @@ class para_RscStructuredText
 	class Attributes
 	{
 		align = "left";
-		color = "#000000";
+		color = "#FFFFFF";
 		colorLink = "#D09B43";
 		font = USEDFONT;
 		size = 0.8;
@@ -85,7 +85,7 @@ class para_RscStructuredText_c: para_RscStructuredText
 	class Attributes
 	{
 		align = "center";
-		color = "#000000";
+		color = "#FFFFFF";
 		colorLink = "#D09B43";
 		font = USEDFONT;
 		size = 0.8;
@@ -98,7 +98,7 @@ class para_RscStructuredText_r: para_RscStructuredText
 	class Attributes
 	{
 		align = "right";
-		color = "#000000";
+		color = "#FFFFFF";
 		colorLink = "#D09B43";
 		font = USEDFONT;
 		size = 0.8;
@@ -345,7 +345,7 @@ class para_RscButton_ImgSwitch
 	/////////////////// IMPORTANT! DON'T TOUCH OR OVERWRITE! /////////////////////////////////////////////
 
 	color[] = {1,1,1,1};
-	colorText[] = {0,0,0,1};
+	colorText[] = {1,1,1,1};
 	colorBackground[] = {0,0,0,1};
 	colorActive[] = {1,1,1,1};
 	colorDisabled[] = {1,1,1,0.25};
@@ -371,8 +371,8 @@ class vn_MyFancyButtonWithChangingTexturesWhenIHoverWithTheMouseOverItCamelCaseI
 
 	tooltip = "I am a Button who exchanges images, when you move your mouse over me! WOOT WOOT!";
 
-	text = "\vn\ui_f_vietnam\ui\taskroster\img\papersheetB.paa";
-	textUp = "\vn\ui_f_vietnam\ui\taskroster\img\papersheetC.paa";
+	text = "ui\taskroster\img\papersheetB.paa";
+	textUp = "ui\taskroster\img\papersheetC.paa";
 
 	onButtonClick = "systemchat str _this;";
 };
@@ -502,7 +502,7 @@ class para_RscCombo
 	font = USEDFONT;
 	shadow = 0;
 	
-	colorText[] = {0,0,0,0.75}; // Text and frame color
+	colorText[] = {1,1,1,0.75}; // Text and frame color
 	colorDisabled[] = {1,1,1,0.5}; // Disabled text color
 	colorSelect[] = {0,0,0,1}; // Text selection color
 	
@@ -590,7 +590,7 @@ class para_RscMapControl
 
 	onLoad = "(_this#0) ctrlenable false;";
 
-	colorText[] = {0,0,0,1};
+	colorText[] = {1,1,1,1};
 	// colorBackground[] = {1,1,1,1};
 
 	shadow = 0;
@@ -1443,7 +1443,7 @@ class para_loadingScreen
 		{
 			idc = 5002;
 			style = 48 + 0x800;
-			text="\vn\objects_f_vietnam\civ\signs\data\billboards\vn_ui_billboard_01_ca.paa";
+			text="custom/loadingscreens/bronation_banner.paa";
 			colorText[] = {1,1,1,0.8};
 			x = "safezoneX";
 			y = "safezoneY";

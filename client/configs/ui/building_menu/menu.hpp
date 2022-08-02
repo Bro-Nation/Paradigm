@@ -20,7 +20,7 @@ class para_RscDisplayBuildingMenu
 			h = PARA_FOLDER_H;
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {1,1,1,1};
-			text = "\vn\ui_f_vietnam\ui\taskroster\img\tr_folder_background_sheetL.paa";
+			text = "ui\taskroster\img\tr_folder_background_sheetL.paa";
 			tooltip = "";
 		};
 		class Picture: para_RscPicture
@@ -42,7 +42,7 @@ class para_RscDisplayBuildingMenu
 			
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {1,1,1,1};
-			text = "\vn\ui_f_vietnam\ui\buildingmenu\bn_rightSheet.paa";
+			text = "ui\buildingmenu\bn_rightSheet.paa";
 			tooltip = "";
 		};
 	};
@@ -313,7 +313,7 @@ class para_RscDisplayBuildingMenu
 			
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {1,1,1,1};
-			text = "\vn\ui_f_vietnam\ui\taskroster\img\tr_folder_cordels.paa";
+			text = "ui\taskroster\img\tr_folder_cordels.paa";
 			tooltip = "";
 			onLoad = "(_this#0) ctrlenable false;";
 		};

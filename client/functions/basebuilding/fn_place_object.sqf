@@ -116,7 +116,7 @@ para_l_building_action_id = [
 	{
 		para_l_placing_in_progress = true;
 		playSound selectRandom ["vn_build_1","vn_build_2","vn_build_3"];
-		[format["<t font='tt2020base_vn' color='#ff0000' size = '.8'>%1</t>", localize "STR_para_building_placing_in_progress"],0,0,1,0,0,789] spawn BIS_fnc_dynamicText;
+		[format["<t font='RobotoCondensed' color='#ff0000' size = '.8'>%1</t>", localize "STR_para_building_placing_in_progress"],0,0,1,0,0,789] spawn BIS_fnc_dynamicText;
 	},											// Code executed when action starts
 	{},											// Code executed on every progress tick
 	{

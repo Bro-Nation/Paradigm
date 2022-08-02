@@ -15,36 +15,9 @@ class para_RscDisplayDynamicGroups
 			h = PARA_FOLDER_H;
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {1,1,1,1};
-			text = "\vn\ui_f_vietnam\ui\taskroster\img\tr_folder_background_sheetL.paa";
+			text = "ui\taskroster\img\tr_folder_background_sheetL.paa";
 			tooltip = "";
 		};
-        //Clean Sheet, already adjusted to Standard Folder Size and correct position
-        class PARA_DG_sheet_clean_R_base: para_RscPicture
-        {
-            x = PARA_SHEET_R_X;
-            y = PARA_SHEET_R_Y;
-            w = PARA_SHEET_R_W;
-            h = PARA_SHEET_R_H;
-            
-            colorText[] = {1,1,1,1};
-            colorBackground[] = {1,1,1,1};
-            text = "\vn\ui_f_vietnam\ui\taskroster\img\tr_sheet_clean.paa";
-            tooltip = "";
-        };
-        //Cordels in the center of the folder. Must be loaded as last item!
-        class PARA_DG_cordels: para_RscPicture
-        {
-            x = PARA_CORDLES_X;
-            y = PARA_CORDLES_Y;
-            w = PARA_CORDLES_W;
-            h = PARA_CORDLES_H;
-            
-            colorText[] = {1,1,1,1};
-            colorBackground[] = {1,1,1,1};
-            text = "\vn\ui_f_vietnam\ui\taskroster\img\tr_folder_cordels.paa";
-            tooltip = "";
-            onLoad = "(_this#0) ctrlenable false;";
-        };
     };
     class Controls 
     {

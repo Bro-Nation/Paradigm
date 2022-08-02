@@ -21,7 +21,7 @@ params ["_object"];
 	_object,
 	createHashMapFromArray [
 		["condition", {_this call para_g_fnc_is_resupply}],
-		["iconPath", "\vn\ui_f_vietnam\ui\wheelmenu\img\icons\vn_ico_mf_resupply_ca.paa"],
+		["iconPath", "ui\wheelmenu\img\icons\vn_ico_mf_resupply_ca.paa"],
 		["functionArguments", _object],
 		["function", "para_c_fnc_resupply_building_with_crate"],
 		["text", localize "STR_vn_mf_resupply"]

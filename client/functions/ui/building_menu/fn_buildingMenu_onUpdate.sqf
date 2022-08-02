@@ -156,7 +156,7 @@ if !((count _shown) isEqualTo 0) then {
 		];
 		if (_class isEqualTo _data) then { _indexSel = _index };
 		_tableControl ctSetData [_index, _class];
-		_pictureCtrl ctrlSetText ([_icon, "\vn\ui_f_vietnam\ui\debrief\sticky.paa"] select (_icon isEqualTo ""));
+		_pictureCtrl ctrlSetText ([_icon, "ui\debrief\sticky.paa"] select (_icon isEqualTo ""));
 		_nameCtrl ctrlSetStructuredText (parseText format ["<t color='#000000'>%1</t>", _name]);
 	};
 
@@ -247,10 +247,10 @@ if !(_data isEqualTo "") then {
 		_texture spawn {
 			uiSleep diag_deltaTime;
 			private _picture = uiNamespace getVariable ['#para_c_BuildingMenu_Picture', controlNull];
-			_picture ctrlSetText ([_this, "\vn\ui_f_vietnam\ui\debrief\sticky.paa"] select (_this isEqualTo ""));
+			_picture ctrlSetText ([_this, "ui\debrief\sticky.paa"] select (_this isEqualTo ""));
 		};
 	} else {
-		_picture ctrlSetText ([_texture, "\vn\ui_f_vietnam\ui\debrief\sticky.paa"] select (_texture isEqualTo ""));
+		_picture ctrlSetText ([_texture, "ui\debrief\sticky.paa"] select (_texture isEqualTo ""));
 	};
 
 	private _canBuild = !(false in (_conditions apply { _x#1 }));

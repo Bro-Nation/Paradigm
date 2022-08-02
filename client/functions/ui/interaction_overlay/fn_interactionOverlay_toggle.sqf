@@ -26,7 +26,7 @@ para_c_InteractionOverlay_Settings_toggled = !para_c_InteractionOverlay_Settings
 	]
 ] call para_c_fnc_postNotification;
 
-private _icon = format ["\vn\ui_f_vietnam\ui\interactionOverlay\hud-%1.paa", ["off", "on"] select para_c_InteractionOverlay_Settings_toggled];
+private _icon = format ["ui\taskroster\box_%1.paa", ["unchecked", "checked"] select para_c_InteractionOverlay_Settings_toggled];
 private _control = uiNamespace getVariable ["#para_InteractionOverlay_state_Icon", controlNull];
 _control ctrlSetText _icon;
 

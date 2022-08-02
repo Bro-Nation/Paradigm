@@ -164,7 +164,7 @@ class para_VoteOverlay
                                                     y = 0;
                                                     w = UIH(0.8) * (3 / 4);
                                                     h = UIH(0.8);
-                                                    text = "\vn\ui_f_vietnam\ui\interactionOverlay\vn_ico_mf_hud_key_ca.paa";
+                                                    text = "ui\interactionOverlay\vn_ico_mf_hud_key_ca.paa";
                                                 };
                                                 class Key: para_InteractionOverlay_RscText
                                                 {
@@ -174,7 +174,7 @@ class para_VoteOverlay
                                                     y = 0;
                                                     w = UIH(0.8) * (3 / 4);
                                                     h = UIH(0.8);
-                                                    colorText[] = {0,0,0,1};
+                                                    colorText[] = {1,1,1,1};
                                                     text = "F1";
                                                     sizeEx = TXT_CST(0.7);
                                                     onLoad = "uiNamespace setVariable ['#para_c_VoteOverlay_Primary_Key', (_this#0)];";
@@ -232,7 +232,7 @@ class para_VoteOverlay
                                                     y = 0;
                                                     w = UIH(0.8) * (3 / 4);
                                                     h = UIH(0.8);
-                                                    text = "\vn\ui_f_vietnam\ui\interactionOverlay\vn_ico_mf_hud_key_ca.paa";
+                                                    text = "ui\interactionOverlay\vn_ico_mf_hud_key_ca.paa";
                                                 };
                                                 class Key: para_InteractionOverlay_RscText
                                                 {
@@ -242,7 +242,7 @@ class para_VoteOverlay
                                                     y = 0;
                                                     w = UIH(0.8) * (3 / 4);
                                                     h = UIH(0.8);
-                                                    colorText[] = {0,0,0,1};
+                                                    colorText[] = {1,1,1,1};
                                                     onLoad = "uiNamespace setVariable ['#para_c_VoteOverlay_Secondary_Key', (_this#0)];";
                                                     text = "F2";
                                                     sizeEx = TXT_CST(0.7);

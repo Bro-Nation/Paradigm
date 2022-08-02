@@ -27,7 +27,7 @@ class para_Overlay_RscStructuredText: para_RscStructuredText
 	class Attributes
 	{
 		font = "RobotoCondensed";
-		color = "#ffffff";
+		color = "#FFFFFF";
 		colorLink = "#D09B43";
 		align = "left";
 		shadow = 0;
@@ -45,12 +45,12 @@ class para_Overlay_Title_Background: para_Overlay_RscText
 
 class para_Overlay_Text_Background: para_Overlay_RscText
 {
-    colorBackground[] = {0,0,0,0.5};
+    colorBackground[] = {1,1,1,0.5};
 	colorText[] = OVERLAY_ACTION_TEXT_COLOR;
 };
 
 class para_Overlay_StructuredText_Background: para_Overlay_RscStructuredText
 {
-    colorBackground[] = {0,0,0,0.5};
+    colorBackground[] = {1,1,1,0.5};
 	colorText[] = OVERLAY_ACTION_TEXT_COLOR;
 };

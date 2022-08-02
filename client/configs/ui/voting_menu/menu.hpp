@@ -7,7 +7,7 @@ class para_VotingMenu
 		class Paper: para_RscPicture
 		{
 			idc = -1;
-			text = "\vn\ui_f_vietnam\ui\taskroster\img\Exports_Paper_1.paa";
+			text = "ui\taskroster\img\Exports_Paper_1.paa";
 			x = UIX_CL((17.5 / 2));
 			y = UIY_CU((22 / 2));
 			w = UIW(17.5);

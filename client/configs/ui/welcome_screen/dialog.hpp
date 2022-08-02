@@ -36,7 +36,7 @@ class para_WelcomeScreen {
             style = ST_RIGHT;
             text = "";
             colorBackground[] = {0,0,0,0};
-            colorText[] = {0,0,0,0.8};
+            colorText[] = {1,1,1,0.8};
         };
 
         class Scrollable: para_RscControlsGroupNoScrollbarH {
@@ -100,7 +100,7 @@ class para_ChangelogScreen {
             style = ST_RIGHT;
             text = "";
             colorBackground[] = {0,0,0,0};
-            colorText[] = {0,0,0,0.8};
+            colorText[] = {1,1,1,0.8};
         };
 
         class Scrollable: para_RscControlsGroupNoScrollbarH {

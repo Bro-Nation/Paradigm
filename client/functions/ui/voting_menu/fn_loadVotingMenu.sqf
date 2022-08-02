@@ -26,14 +26,14 @@ _bodyCtrl ctrlSetStructuredText parseText (_data get "content");
 
 {
 	private _i = _optionsCtrl lbAdd format ['- %1', _x];
-	_optionsCtrl lbSetPictureRight [_i, '\vn\ui_f_vietnam\ui\taskroster\img\box_unchecked.paa']
+	_optionsCtrl lbSetPictureRight [_i, 'ui\taskroster\img\box_unchecked.paa']
 } forEach (_data get "options");
 
 _optionsCtrl ctrlAddEventHandler ['LBSelChanged', {
 	for '_i' from 0 to (lbSize (_this#0)) - 1 do {
-		(_this#0) lbSetPictureRight [_i, '\vn\ui_f_vietnam\ui\taskroster\img\box_unchecked.paa']
+		(_this#0) lbSetPictureRight [_i, 'ui\taskroster\img\box_unchecked.paa']
 	};
-	(_this#0) lbSetPictureRight [(_this#1), '\vn\ui_f_vietnam\ui\taskroster\img\box_checked.paa']
+	(_this#0) lbSetPictureRight [(_this#1), 'ui\taskroster\img\box_checked.paa']
 }];
 
 _voteCtrl ctrlAddEventHandler ['ButtonClick', {

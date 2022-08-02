@@ -195,10 +195,10 @@ _ctrlB ctrlSetPosition
 #define COLOR_KEYBINDINGS_DOUBLEBIND_UNSELECTED [1,0,0,0.5]
 
 //Text stuff:
-#define USEDFONT "tt2020base_vn"
-#define USEDFONT_B "tt2020base_vn_bold"
-#define USEDFONT_ALT "tt2020style_e_vn"
-#define USEDFONT_ALT_B "tt2020style_e_vn_bold"
+#define USEDFONT "RobotoCondensed"
+#define USEDFONT_B "RobotoCondensedBold"
+#define USEDFONT_ALT "PuristaMedium"
+#define USEDFONT_ALT_B "PuristaSemibold"
 
 #define CALCRESANDAR	UIY_CALC_A
 #define TXT_CST(NUM)	(UIY_CALC_A * NUM)

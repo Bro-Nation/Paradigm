@@ -10,7 +10,7 @@ class para_InteractionOverlay_RscStructuredText: para_RscStructuredText
 	class Attributes
 	{
 		font = "RobotoCondensed";
-		color = "#ffffff";
+		color = "#FFFFFF";
 		colorLink = "#D09B43";
 		align = "left";
 		shadow = 0;
@@ -142,7 +142,7 @@ class para_InteractionOverlay
 											y = 0;
 											w = UIH(0.8) * (3 / 4) * 3;
 											h = UIH(0.8);
-											text = "\vn\ui_f_vietnam\ui\interactionOverlay\vn_ico_mf_hud_key_long_ca.paa";
+											text = "ui\interactionOverlay\vn_ico_mf_hud_key_long_ca.paa";
 										};
 										class Key: para_InteractionOverlay_RscText
 										{
@@ -152,7 +152,7 @@ class para_InteractionOverlay
 											y = 0;
 											w = UIH(0.8) * (3 / 4) * 3;
 											h = UIH(0.8);
-											colorText[] = {0,0,0,1};
+											colorText[] = {1,1,1,1};
 											onLoad = "uiNamespace setVariable ['#para_InteractionOverlay_InteractionModifierName', (_this#0)];";
 											text = "";
 										};
@@ -175,7 +175,7 @@ class para_InteractionOverlay
 											y = 0;
 											w = UIH(0.8) * (3 / 4);
 											h = UIH(0.8);
-											text = "\vn\ui_f_vietnam\ui\interactionOverlay\vn_ico_mf_hud_key_ca.paa";
+											text = "ui\interactionOverlay\vn_ico_mf_hud_key_ca.paa";
 										};
 										class Key: para_InteractionOverlay_RscText
 										{
@@ -185,7 +185,7 @@ class para_InteractionOverlay
 											y = 0;
 											w = UIH(0.8) * (3 / 4);
 											h = UIH(0.8);
-											colorText[] = {0,0,0,1};
+											colorText[] = {1,1,1,1};
 											onLoad = "uiNamespace setVariable ['#para_InteractionOverlay_InteractionKeyName', (_this#0)];";
 											text = "";
 										};
@@ -309,7 +309,7 @@ class para_InteractionOverlay_state
 			w = UIH(PARA_IO_STATE_ICON_SIZE) * (3 / 4);
 			h = UIH(PARA_IO_STATE_ICON_SIZE);
 			colorText[] = { 1, 1, 1, 0.5 };
-			text = "\vn\ui_f_vietnam\ui\interactionOverlay\hud-on.paa";
+			text = "ui\taskroster\box_checked.paa";
 			onLoad = "uiNamespace setVariable ['#para_InteractionOverlay_state_Icon', (_this#0)];";
 		};
 	};
