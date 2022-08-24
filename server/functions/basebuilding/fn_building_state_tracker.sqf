@@ -45,14 +45,14 @@ para_l_buildings = para_l_buildings - [objNull];
 				private _isBaseStarter = isClass (_buildableConfig >> "features" >> "base_starter");
 				if (isNil str(_base) && !_isBaseStarter) then {
 					// (random 1 > 0.965) Aiming for a 50% chance to have vanished within 20 minutes after the base has despawned, given this script runs once a minute.
-					// (random 1 > 0.87) Aiming for a 50% chance to have vanished within 5 minutes after the base has despawned, given this script runs once a minute.
-					if (random 1 > 0.87) then {
+					// (random 1 > 0.75) Aiming for a 50% chance to have vanished within 2 minutes after the base has despawned, given this script runs once a minute.
+					if (random 1 > 0.75) then {
 						[_building] call para_s_fnc_building_delete;
 					};
 				} else {
 					// (random 1 > 0.965) Aiming for a 50% chance to have vanished within 20 minutes, given this script runs once a minute. Keeping both if statements to allow for tuning.
-					// (random 1 > 0.87) Aiming for a 50% chance to have vanished within 5 minutes, given this script runs once a minute. Keeping both if statements to allow for tuning.
-					if (random 1 > 0.87) then {
+					// (random 1 > 0.75) Aiming for a 50% chance to have vanished within 2 minutes, given this script runs once a minute. Keeping both if statements to allow for tuning.
+					if (random 1 > 0.75) then {
 						//Delete base and "base starter(s)" at the same time
 						[_building] call para_s_fnc_building_delete;
 						[_base] call para_s_fnc_base_delete;
