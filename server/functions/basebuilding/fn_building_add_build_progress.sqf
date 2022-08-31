@@ -22,6 +22,7 @@ params ["_building", "_progressChange", ["_updateObjects", true]];
 
 private _oldProgress = _building getVariable ["para_g_build_progress", 0];
 private _newProgress = (_oldProgress + _progressChange) min 1 max 0;
+hint format["Progress change: %1, New progress: %2", _progressChange, _newProgress];
 _building setVariable ["para_g_build_progress", _newProgress, true];
 
 
@@ -48,4 +49,10 @@ if (_newProgress < 1 && _updateObjects) then
 			_x animateSource ["hide_supply_source",_animState];
 		};
 	} forEach (_building getVariable ["para_g_objects", []]);
+};
+
+//if old progress is zero and gets hammer hit delete the building
+if (_progressChange == -0.5 && _oldProgress == 0) then 
+{
+	[_building] call para_s_fnc_building_delete;
 };
