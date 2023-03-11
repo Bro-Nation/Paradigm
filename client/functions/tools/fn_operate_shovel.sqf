@@ -22,12 +22,17 @@ params ["_hitObject"];
 private _building = _hitObject getVariable ["para_g_building", objNull];
 private _currentTeam = player getVariable ["vn_mf_db_player_group", "MikeForce"];
 
+// player should have been validated as a whitelist member when joining the group
+// so no need to check whitelist again here
+
 if !(_currentTeam in ["MikeForce", "GreenHornets", "ACAV", "SpikeTeam"]) then
 {
+	// 0.4 ==> 3x shovel hits to build up a structure
 	["building_on_hit", [_building, 0.4]] call para_c_fnc_call_on_server;
 } 
 else 
 {
+	// 0.2 ==> 5x shovel hits to build up a structure (the default vanilla Mike Force setting)
     ["building_on_hit", [_building, 0.2]] call para_c_fnc_call_on_server;
 };
 
