@@ -36,4 +36,5 @@ else
     ["building_on_hit", [_building, 0.2]] call para_c_fnc_call_on_server;
 };
 
+// without this the above function may get called about 7 times (see fn_operate_hammer.sqf)
 false
