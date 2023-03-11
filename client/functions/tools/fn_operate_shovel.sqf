@@ -1,7 +1,7 @@
 /*
     File: fn_operate_shovel.sqf
     Author:  Savage Game Design
-	Modified: John The GI / DJ Dijksterhuis
+    Modified: John The GI / DJ Dijksterhuis
     Public: Yes
     
     Description:
