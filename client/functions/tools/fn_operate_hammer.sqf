@@ -35,7 +35,7 @@ if (_currentTeam in ["MikeForce", "GreenHornets", "ACAV", "SpikeTeam"]) then
 } 
 else 
 {
-    // 0.4 ==> 3x hammer hits to destroy up a structure
+    // 0.4 ==> 3x hammer hits to destroy a structure
     ["building_on_hit", [_building, -0.4]] call para_c_fnc_call_on_server;
 };
 
