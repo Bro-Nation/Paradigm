@@ -143,7 +143,7 @@ while {true} do {
 	// this means AI spawn one line step further away from the objective,
 	// but this is necessary to avoid AI units spawning at water positions
 	// when setting _finalPosition = _tracerPosition
-	if (_tracerPosition distance2D _tracerEndPos < (_stepSize * 2)) exitWith {
+	if (_tracerPosition distance2D _tracerEndPos < _stepSize) exitWith {
 		_finalPosition = _lastValidTracerPosition;
 	};
 };
