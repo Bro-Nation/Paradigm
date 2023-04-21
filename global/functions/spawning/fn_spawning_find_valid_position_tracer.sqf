@@ -57,7 +57,7 @@ private _hardBlockRadius = 200;
 //Adjust the tracer to end _minDistance away.
 _tracerEndPos = _tracerEndPos getPos [_minDistance, _attackDir + 180];
 private _tracerStart = _tracerEndPos getPos [1500, _attackDir + 180];
-private _lastTracerPosition = _tracerStart;
+private _lastValidTracerPosition = _tracerStart;
 private _tracerPosition = _tracerStart;
 
 //The valid position to spawn at
@@ -81,7 +81,7 @@ while {true} do {
 	if (surfaceIsWater _newTracerPosition) then {
 
 		// invalid terrain, ignore this spawn position to mitigate AI spawning in water
-		_lastTracerPosition = _lastTracerPosition;
+		_lastValidTracerPosition = _lastValidTracerPosition;
 
 		//Places debug markers on the map when tracers are fired.
 		if (!isNil "debugAttackTracer") then {
@@ -94,7 +94,7 @@ while {true} do {
 	} else {
 
 		// valid terrain, update the last known good spawn position
-		_lastTracerPosition = _tracerPosition;
+		_lastValidTracerPosition = _tracerPosition;
 
 		//Places debug markers on the map when tracers are fired.
 		if (!isNil "debugAttackTracer") then {
@@ -134,7 +134,7 @@ while {true} do {
 		if (_tracerPosition isEqualTo _tracerStart) then {
 			_finalPosition = [];
 		} else {
-			_finalPosition = _lastTracerPosition;
+			_finalPosition = _lastValidTracerPosition;
 		};
 	};
 
@@ -143,8 +143,8 @@ while {true} do {
 	// this means AI spawn one line step further away from the objective,
 	// but this is necessary to avoid AI units spawning at water positions
 	// when setting _finalPosition = _tracerPosition
-	if (_tracerPosition distance2D _tracerEndPos < _stepSize) exitWith {
-		_finalPosition = _lastTracerPosition;
+	if (_tracerPosition distance2D _tracerEndPos < (_stepSize * 2)) exitWith {
+		_finalPosition = _lastValidTracerPosition;
 	};
 };
 
