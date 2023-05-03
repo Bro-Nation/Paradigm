@@ -82,24 +82,28 @@ while {true} do {
 
 		// invalid terrain, ignore this spawn position to mitigate AI spawning in water
 		_lastValidTracerPosition = _lastValidTracerPosition;
-		private _debugMarkerColour = "ColorBlue";
+
+		//Places debug markers on the map when tracers are fired.
+		if (!isNil "debugAttackTracer") then {
+			private _mark = createMarker ["TracerWater" + str diag_tickTime + str _index, _newTracerPosition];
+			_mark setMarkerType "mil_dot";
+			_mark setMarkerColor "ColorBlue";
+			tracerMarkers pushBack _mark;
+		};
 
 	} else {
 
 		// valid terrain, update the last known good spawn position
 		_lastValidTracerPosition = _tracerPosition;
-		private _debugMarkerColour = "ColorPink";
 
+		//Places debug markers on the map when tracers are fired.
+		if (!isNil "debugAttackTracer") then {
+			private _mark = createMarker ["Tracer" + str diag_tickTime + str _index, _newTracerPosition];
+			_mark setMarkerType "mil_dot";
+			_mark setMarkerColor "ColorPink";
+			tracerMarkers pushBack _mark;
+		};
 	};
-
-	//Places debug markers on the map when tracers are fired.
-	if (!isNil "debugAttackTracer") then {
-		private _mark = createMarker ["Tracer" + str diag_tickTime + str _index, _newTracerPosition];
-		_mark setMarkerType "mil_dot";
-		_mark setMarkerColor _debugMarkerColour;
-		tracerMarkers pushBack _mark;
-	};
-
 
 	// now we inspect the point based on player distributions.
 	_tracerPosition = _newTracerPosition;
