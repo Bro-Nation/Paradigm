@@ -66,15 +66,9 @@ so force them out of the static and then the AI system can reassign them.
 */
 _objective setVariable ["onDeactivation", {
 	params ["_objective"];
-	private _groups = _objective getVariable ["assignedGroups", []];
-	{
-		private _g = _x;
-		{
-			If(_x == (vehicle _x)) then {
-				moveOut _x;
-			};
-		} forEach (units _g);
-	} forEach _groups;
+	_objective getVariable ["assignedGroups", []] apply {
+		(units _x) apply {if(_x == (vehicle _x)) then {moveOut _x}};
+	};
 }];
 
 _objective
