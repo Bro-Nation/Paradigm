@@ -60,4 +60,21 @@ _objective setVariable ["onTick", {
 	_objective setPos getPos (_objective getVariable "vehicle");
 }];
 
+/*
+we cannot retask AI if they are on a static weapon as they are unable to move.
+so force them out of the static and then the AI system can reassign them.
+*/
+_objective setVariable ["onDeactivation", {
+	params ["_objective"];
+	private _groups = _objective getVariable ["assignedGroups", []];
+	{
+		private _g = _x;
+		{
+			If(_x == (vehicle _x)) then {
+				moveOut _x;
+			};
+		} forEach (units _g);
+	} forEach _groups;
+}];
+
 _objective
