@@ -65,8 +65,6 @@ private _finalPosition = _tracerStart;
 //Unit that caused the tracer to stop.
 private _stoppedOnTarget = objNull;
 
-debugAttackTracer = true;
-
 if (!isNil "debugAttackTracer" && isNil "tracerMarkers") then {
 	tracerMarkers = [];
 };
