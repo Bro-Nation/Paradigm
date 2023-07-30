@@ -65,6 +65,8 @@ private _finalPosition = _tracerStart;
 //Unit that caused the tracer to stop.
 private _stoppedOnTarget = objNull;
 
+debugAttackTracer = true;
+
 if (!isNil "debugAttackTracer" && isNil "tracerMarkers") then {
 	tracerMarkers = [];
 };
@@ -83,7 +85,7 @@ while {true} do {
 		// invalid terrain, ignore this spawn position to mitigate AI spawning in water
 		_lastValidTracerPosition = _lastValidTracerPosition;
 
-		//Places debug markers on the map when tracers are fired.
+		// Places debug markers on the map when tracers are fired.
 		if (!isNil "debugAttackTracer") then {
 			private _mark = createMarker ["TracerWater" + str diag_tickTime + str _index, _newTracerPosition];
 			_mark setMarkerType "mil_dot";
@@ -131,11 +133,7 @@ while {true} do {
 
 	//If we find a unit, we exit and set the last valid position + which target stopped us.
 	if (!_positionIsValid) exitWith {
-		if (_tracerPosition isEqualTo _tracerStart) then {
-			_finalPosition = [];
-		} else {
-			_finalPosition = _lastValidTracerPosition;
-		};
+		_finalPosition = _lastValidTracerPosition;
 	};
 
 	// @dijksterhuis: If we are very close to the end of the projected line
@@ -144,7 +142,7 @@ while {true} do {
 	// but this is necessary to avoid AI units spawning at water positions
 	// when setting _finalPosition = _tracerPosition
 	if (_tracerPosition distance2D _tracerEndPos < _stepSize) exitWith {
-		_finalPosition = _lastValidTracerPosition;
+		_finalPosition = _tracerPosition;
 	};
 };
 
@@ -153,6 +151,10 @@ if (!isNil "debugAttackTracer") then {
 	_mark setMarkerType "mil_dot";
 	_mark setMarkerColor "ColorRed";
 	tracerMarkers pushBack _mark;
+};
+
+if (_finalPosition isEqualTo _tracerStart) then {
+	_finalPosition = [];
 };
 
 [_finalPosition, _stoppedOnTarget]
