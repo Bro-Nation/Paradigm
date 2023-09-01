@@ -191,7 +191,8 @@ private _assignedUnitFlex = 4;
 	call
 	{
 		//Don't need to do anything if we have enough units. Let's roughly define that as 50% dead for now.
-		if (_totalAliveUnits >= _desiredUnitCount * 0.5) exitWith {};
+		// @dijksterhuis -- modified to always reinforce to full strength
+		if (_totalAliveUnits >= _desiredUnitCount * 1) exitWith {};
 
 		private _reinforcementsNeeded = _desiredUnitCount - _totalAliveUnits;
 
