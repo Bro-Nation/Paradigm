@@ -1,6 +1,7 @@
 /*
     File: fn_ai_obj_reinforce.sqf
     Author:  Savage Game Design
+    Modified: @dijksterhuis
     Public: No
     
     Description:
@@ -16,7 +17,7 @@
     Example(s):
 		[_myObjective, 30, _nearestPool] call para_s_fnc_ai_obj_reinforce;
 */
-params ["_objective", "_unitCount"];
+params ["_objective", "_unitCount", ["_players", allPlayers select {side _x != east}]];
 
 private _objectivePos = getPos _objective;
 
@@ -32,7 +33,7 @@ private _enabledSpawnTypes = _x getVariable ["enabled_spawn_types", ["DIRECT", "
 private _spawnPosition = [];
 
 //Direct spawn if no players blocking it.
-if ("DIRECT" in _enabledSpawnTypes && {count (allPlayers inAreaArray [getPos _objective, _blockDirectRange, _blockDirectRange]) <= 0}) then 
+if ("DIRECT" in _enabledSpawnTypes && {count (_players inAreaArray [getPos _objective, _blockDirectRange, _blockDirectRange]) <= 0}) then 
 {
 	//World position because we're using simple objects
 	_spawnPosition = _objectivePos;
@@ -43,7 +44,7 @@ if (_spawnPosition isEqualTo []) then
 {
 	private _validAttackAngles = [getPos _objective] call para_g_fnc_spawning_valid_attack_angles;
 	private _tracerDirection = (_validAttackAngles select 0) + random ((_validAttackAngles select 1) - (_validAttackAngles select 0));
-	private _tracerResult = [_objectivePos, nil,  _tracerDirection, 300] call para_g_fnc_spawning_find_valid_position_tracer;
+	private _tracerResult = [_objectivePos, _players,  _tracerDirection, 300] call para_g_fnc_spawning_find_valid_position_tracer;
 	if !(_tracerResult isEqualTo []) then {_spawnPosition = _tracerResult select 0;};
 };
 
