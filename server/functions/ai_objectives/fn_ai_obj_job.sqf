@@ -238,6 +238,7 @@ private _assignedUnitFlex = 4;
 			_unitsRemainingInGlobalPool
 			max 0;
 
+		/*
 		diag_log format [
 			"AI Obj %1 [%6]: Reinforcing with %2 units. Needed: %3, available: %4, global: %5",
 			_obj getVariable "id",
@@ -247,6 +248,7 @@ private _assignedUnitFlex = 4;
 			_unitsRemainingInGlobalPool,
 			_obj getVariable "type"
 		];
+		*/
 
 		[_obj, _unitsToSendCount] call para_s_fnc_ai_obj_reinforce;
 		_currentUnitCount = _currentUnitCount + _unitsToSendCount;
