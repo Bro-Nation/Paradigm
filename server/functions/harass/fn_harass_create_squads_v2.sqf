@@ -79,7 +79,7 @@
 	private _friendlyPlayersToHarass = _harassablePlayers select {_x getVariable "harass_level" < 1};
 	private _playersToPursueHarrass = _friendlyPlayersToHarass - _playersHarrassedBaseAttacks;
 
-	private _playersHarrassedPursuits = [_playersToPursueHarrass] call para_s_fnc_harass_pursuit;
+	private _playersHarrassedPursuits = [_playersToPursueHarrass] call para_s_fnc_harass_pursue_players;
 
 } forEach [west, east, independent];
 
