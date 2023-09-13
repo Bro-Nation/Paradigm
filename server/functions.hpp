@@ -167,6 +167,11 @@ class para_s
 		class harass_create_squads {};
 		class harass_job {};
 		class harass_subsystem_init {};
+		// @dijksterhuis patched harrass system
+		// not replacing outright yet so we can test between restarts
+		class harass_attack_base {};
+		class harass_pursue_players {};
+		class harass_create_squads_v2 {};
 	};
 
 	class init
