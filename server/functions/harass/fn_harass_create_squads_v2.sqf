@@ -81,5 +81,16 @@
 
 	private _playersHarrassedPursuits = [_playersToPursueHarrass] call para_s_fnc_harass_pursue_players;
 
+	// debug logging to track state of harassment over time
+	private _log_msg = format [
+		"Side:%1, SidePlayers:%2, HarrasablePlayers:%3, BaseAttacksPlayers:%4, PursuitPlayers:%5",
+		_side,
+		count _friendlyPlayers,
+		count _harassablePlayers,
+		count _playersHarrassedBaseAttacks,
+		count _playersHarrassedPursuits
+	];
+	["DEBUG", _log_msg] call para_g_fnc_log;
+
 } forEach [west, east, independent];
 
