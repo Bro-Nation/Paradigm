@@ -112,7 +112,6 @@ class para_c
 		PARA_CLIENT_PATH(\helpers);
 		class localize {};
 		class localize_and_format {};
-		class rExec_notification {};
 	};
 
 	class voting
@@ -143,6 +142,7 @@ class para_c
 		PARA_CLIENT_PATH(\ui);
 		class getKeyName {};
 		class show_notification {};
+		class rExec_show_notification {};
 		class ui_initMissionDisplay {}; // preInit = 1;
 		class ui_updateImg {};
 		class initEscapeMenu {}; // postInit = 1;
