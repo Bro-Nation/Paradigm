@@ -112,7 +112,7 @@ class para_c
 		PARA_CLIENT_PATH(\helpers);
 		class localize {};
 		class localize_and_format {};
-		class helper_rExec_notification {};
+		class rExec_notification {};
 	};
 
 	class voting

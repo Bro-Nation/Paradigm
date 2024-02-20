@@ -1,5 +1,5 @@
 /*
-    File: fn_helper_rExec_notification.sqf
+    File: fn_rExec_notification.sqf
     Author: 'DJ' Disjkterhuis
     Public: No
 
@@ -11,18 +11,18 @@
 
     Parameter(s):
 		_title - STRING: title on the pop up defined in the stringtable
-		_msg - STRING: Message body to add to the pop up notification. DO NOT ARRAY-IFY. 
-		_entities - Object/Array: Who to send the notification to.
-		_scheduled - Boolean (default false), how to do the remote exec.
+		_msg - ARRAY: Message body to add to the pop up notification. 
+		_entities - OBJECT / ARRAY / NUMBER: Who to send the notification to.
+		_scheduled - BOOLEAN (default false): how to do the remote exec.
 
     Returns: nothing (triggers notification in entities' UI)
 
     Example(s):
-    	// unscheduled
-    	[player, "NonBlocking", ["Notification is async."]] call para_c_fnc_helper_rExec_notification;
-    	[player, "NonBlocking", ["Notification is async."], false] call para_c_fnc_helper_rExec_notification;
-    	// scheduled
-    	["Blocking", ["Notification must display before next remoteExec."], player, true] call para_c_fnc_helper_rExec_notification;
+	// unscheduled
+	[player, "NonBlocking", ["Notification is async."]] call para_c_fnc_rExec_notification;
+	[player, "NonBlocking", ["Notification is async."], false] call para_c_fnc_rExec_notification;
+	// scheduled
+	["Blocking", ["Notification must display before next remoteExec."], player, true] call para_c_fnc_rExec_notification;
 */
 
 params ["_entities", "_title", ["_msg", []], ["scheduled", false]];
