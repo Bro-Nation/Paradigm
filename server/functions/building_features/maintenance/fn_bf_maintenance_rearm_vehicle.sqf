@@ -90,7 +90,7 @@ private _usedSupplies = [_building, _totalCost] call para_s_fnc_building_consume
 if (_usedSupplies) then 
 {
 	[_vehicle, 1] remoteExecCall ["setVehicleAmmo", crew _vehicle];
-	[crew _vehicle, "VehicleRearmed"] call para_c_fnc_rExec_show_notification;
+	[crew _vehicle, "VehicleRearmed", [_totalCost toFixed 1]] call para_c_fnc_rExec_show_notification;
 }
 else 
 {
