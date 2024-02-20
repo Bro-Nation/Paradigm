@@ -48,6 +48,11 @@ if (behaviour leader _group != "AWARE") then {
 	_group setBehaviour "AWARE";
 };
 
+// @dijksterhuis: The original SGD code allows AI to lay down, crawl, kneel, crouch etc.
+// When 'attacking' in Mike Force, the AI are usually supposed to be running at a bluefor FOB.
+// So going prone doesn't make much sense.
+// How are they going to get to the FOB if they're crawling all the way there!
+
 // [_group, "AUTO"] call para_g_fnc_behaviour_set_group_stance;
 [_group, "UP"] call para_g_fnc_behaviour_set_group_stance;
 
