@@ -19,10 +19,10 @@
 
     Example(s):
     	// unscheduled
-    	["AdminLog", "Someone is being a naughty boy.", player] call para_c_fnc_helper_rExec_notification;
-    	["AdminLog", "Someone is being a naughty boy.", player, false] call para_c_fnc_helper_rExec_notification;
+    	[player, "NonBlocking", ["Notification is async."]] call para_c_fnc_helper_rExec_notification;
+    	[player, "NonBlocking", ["Notification is async."], false] call para_c_fnc_helper_rExec_notification;
     	// scheduled
-    	["AdminLog", "Someone is being a naughty boy.", player, true] call para_c_fnc_helper_rExec_notification;
+    	["Blocking", ["Notification must display before next remoteExec."], player, true] call para_c_fnc_helper_rExec_notification;
 */
 
 params ["_entities", "_title", ["_msg", []], ["scheduled", false]];
