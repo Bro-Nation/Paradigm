@@ -48,7 +48,8 @@ if (behaviour leader _group != "AWARE") then {
 	_group setBehaviour "AWARE";
 };
 
-[_group, "AUTO"] call para_g_fnc_behaviour_set_group_stance;
+// [_group, "AUTO"] call para_g_fnc_behaviour_set_group_stance;
+[_group, "UP"] call para_g_fnc_behaviour_set_group_stance;
 
 
 //TODO - Make them flank when attacking
