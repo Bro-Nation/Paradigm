@@ -40,7 +40,7 @@ if (isNull _building) exitWith
 
 if !([_building] call para_g_fnc_building_is_functional) exitWith
 {
-	["BuildingNonFunctional", []] remoteExec ["para_c_fnc_show_notification", currentPilot _vehicle];
+	[currentPilot _vehicle, "BuildingNonFunctional"] call para_c_fnc_rExec_show_notification;
 };
 
 private _config = [_building] call para_g_fnc_get_building_config;
@@ -70,9 +70,9 @@ private _usedSupplies = [_building, _totalCost] call para_s_fnc_building_consume
 if (_usedSupplies) then 
 {
 	_vehicle setDamage 0;
-	["VehicleRepaired", [_totalCost toFixed 1]] remoteExec ["para_c_fnc_show_notification", currentPilot _vehicle];
+	[currentPilot _vehicle, "VehicleRepaired", [_totalCost toFixed 1]] call para_c_fnc_rExec_show_notification;
 }
 else 
 {
-	["InsufficientResources", []] remoteExec ["para_c_fnc_show_notification", currentPilot _vehicle];  
+	[currentPilot _vehicle, "InsufficientResources"] call para_c_fnc_rExec_show_notification;
 };

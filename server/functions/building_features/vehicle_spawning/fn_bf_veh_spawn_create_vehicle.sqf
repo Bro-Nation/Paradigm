@@ -31,7 +31,7 @@ if (isNull _building) exitWith
 
 if !([_building] call para_g_fnc_building_is_functional) exitWith
 {
-	["BuildingNonFunctional", []] remoteExec ["para_c_fnc_show_notification", _requester];
+	[_requester, "BuildingNonFunctional"] call para_c_fnc_rExec_show_notification;
 };
 
 private _config = [_building] call para_g_fnc_get_building_config;
@@ -44,7 +44,7 @@ if (!isClass _featureConfig) exitWith
 private _nextSpawnTime = _building getVariable ["para_s_bf_veh_spawn_next_spawn_time", 0];
 if (_nextSpawnTime > serverTime) exitWith
 {
-	["VehicleSpawnCooldown", [((_nextSpawnTime - serverTime) / 60) toFixed 1]] remoteExec ["para_c_fnc_show_notification", _requester];
+	[_requester, "VehicleSpawnCooldown", [((_nextSpawnTime - serverTime) / 60) toFixed 1]] call para_c_fnc_rExec_show_notification;
 };
 
 private _spawningConfig = (_featureConfig >> "vehicle_class" >> _classType >> _vehicleType);
@@ -63,7 +63,7 @@ private _spawnPosAGL = ASLToAGL _spawnPosASL;
 
 if (count (_spawnPosAGL nearEntities 10 select {!(_x isKindOf "Animal")}) > 0) exitWith
 {
-	["SpawnPositionBlocked", []] remoteExec ["para_c_fnc_show_notification", _requester];
+	[_requester, "SpawnPositionBlocked"] call para_c_fnc_rExec_show_notification;
 };
 
 private _isShip = _vehicleType isKindOf "Ship";
@@ -71,14 +71,14 @@ private _isWater = surfaceIsWater _spawnPosAGL;
 //if trying to spawn boats on land or cars on sea
 if ((_isShip || _isWater) && !(_isShip && _isWater)) exitwith
 {
-	["VehicleSpawnIncorrect", []] remoteExec ["para_c_fnc_show_notification", _requester];
+	[_requester, "VehicleSpawnIncorrect"] call para_c_fnc_rExec_show_notification;
 };
 
 private _usedSupplies = [_building, _cost] call para_s_fnc_building_consume_supplies;
 
 if !(_usedSupplies) exitWith
 {
-	["InsufficientResources", []] remoteExec ["para_c_fnc_show_notification", _requester];
+	[_requester, "InsufficientResources"] call para_c_fnc_rExec_show_notification;
 };
 
 _building setVariable ["para_s_bf_veh_spawn_next_spawn_time", serverTime + _cooldown];
