@@ -75,8 +75,33 @@ diag_log format ["AI Obj: Active Objectives: %1", _activeObjectives apply {_x ge
 
 private _enemyUnits = allUnits select {side group _x == east};
 
-//Calculate our total AI pool size - this is all the AI we have to use.
-private _globalPoolSize = para_s_ai_obj_hard_ai_limit;
+/*
+Calculate our total AI pool size - this is all the AI we have to use.
+*/
+
+// private _globalPoolSize = para_s_ai_obj_hard_ai_limit;
+
+// stepped linear increase of A count based on valid players for AI.
+// looks sort of like this, but the dots are actually linear increases rather
+// than flat sections... ascii art is hard okay.
+/*
+	|		........
+	|	.......|
+	|.......|
+	------------------------
+*/
+
+// don't touch these unless you know what you're doing.
+private _lambda = 0.1;
+private _moder = 1.2;
+
+// NOTE: We might be able to do away with `nPlayers mod 5` to switch to a non linear (curve)
+// scaling, but stepping makes it a bit more obvious when it happens (useful for debugging/testing)
+
+private _globalPoolSize = floor (
+	((count _allPlayers) * para_g_enemiesPerPlayer) + ((count _allPlayers) * _lambda * (count _allPlayers mod _moder))
+);
+
 private _currentUnitCount = count _enemyUnits;
 
 //diag_log format ["AI Obj: Current Pool Size: %1, Count: %2", _globalPoolSize, _currentUnitCount];
