@@ -21,6 +21,8 @@ params ["_group", "_class", "_position", "_markers", "_placement", "_special"];
 private _unit = _group createUnit [_class, _position, _markers, _placement, _special];
 
 _unit setVariable ["sideAtCreation", side _group, true];
+_unit setVariable ["paradigm_managed", true];
+
 
 //Configure unit skills. These are tuned for infantry jungle-fighting, and may not work as well on vehicle crews.
 _unit setSkill 1;

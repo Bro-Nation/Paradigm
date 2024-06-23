@@ -75,36 +75,62 @@ diag_log format ["AI Obj: Active Objectives: %1", _activeObjectives apply {_x ge
 
 private _enemyUnits = allUnits select {side group _x == east};
 
+// only track AI units that we are responsible for.
+// we don't need to load balance Zeus AI because those are managed on the curator's machine
+// also, some map/editor based AI mess with the calculations at low player populations
+private _enemyUnits = allUnits select {
+	(side group _x == east) && (_x getVariable ["paradigm_managed", false])
+};
+
 /*
-Calculate our total AI pool size - this is all the AI we have to use.
+this function is a very hacky estimation of a periodic convolutio between a monotonically
+increasing linear function and a postive only step function.
+
+It is hacky, but it avoids having to write an FFT implementation or dealing with integrals in convolutions.
+
+We end up with something like this -- as palyers increase, so does amount of AI, with extra AI added at certain points.
+
+AI count
+|
+|										x
+|									x
+|								x
+|							|
+|							|
+|							x
+|						x
+|					x
+|				|
+|				|
+|				x
+|			x
+|		x
+|	x
+x---------------------------------------------
+players
+
 */
 
-// private _globalPoolSize = para_s_ai_obj_hard_ai_limit;
-
-// stepped linear increase of A count based on valid players for AI.
-// looks sort of like this, but the dots are actually linear increases rather
-// than flat sections... ascii art is hard okay.
-/*
-	|		........
-	|	.......|
-	|.......|
-	------------------------
-*/
-
-// don't touch these unless you know what you're doing.
-private _lambda = 0.1;
-private _moder = 1.2;
-
-// NOTE: We might be able to do away with `nPlayers mod 5` to switch to a non linear (curve)
-// scaling, but stepping makes it a bit more obvious when it happens (useful for debugging/testing)
+private _alpha = 0.1;
+private _beta = 1.2;
 
 private _globalPoolSize = floor (
-	((count _allPlayers) * para_g_enemiesPerPlayer) + ((count _allPlayers) * _lambda * (count _allPlayers mod _moder))
+	((count _allPlayers) * para_g_enemiesPerPlayer) + ((count _allPlayers) * _alpha * (count _allPlayers mod _beta))
 );
 
+// clip the pool size for safety.
+_globalPoolSize = _globalPoolSize min para_s_ai_obj_hard_ai_limit
+
+//Calculate our total AI pool size - this is all the AI we have to use.
+// private _globalPoolSize = para_s_ai_obj_hard_ai_limit;
 private _currentUnitCount = count _enemyUnits;
 
-//diag_log format ["AI Obj: Current Pool Size: %1, Count: %2", _globalPoolSize, _currentUnitCount];
+diag_log format [
+	"AI Obj: Current Headroom Stats: PoolSize=%1 UnitCount=%2 HardLimit=%3",
+	_globalPoolSize,
+	_currentUnitCount,
+	para_s_ai_obj_hard_ai_limit
+];
 
 //Prioritise objectives, and order them by priority
 private _objectivePriorityBands = para_s_ai_obj_priority_radii apply {[]};
