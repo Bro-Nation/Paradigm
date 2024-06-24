@@ -68,12 +68,12 @@ _objective setVariable ["onTick", {
 	// try to focus on a target that's not incapacitated with vn_revive.
 	// want to avoid AI standing around targets that are incapacitated
 	// while other targets nearby are active.
-	// TODO: patrol around or move away if no 'up' players?
-	private _target = _targets findIf {!(_x getVariable ["vn_revive_incapacitated", false])};
-	if (_target == -1) then {
-		_target = _targets select 0;
-	};
-	
+	private _targetIdx = _targets findIf {!(_x getVariable ["vn_revive_incapacitated", false])};
+
+	// selects the last target in the targets array if everyone is incapacitated
+	// TODO: patrol around or move away?
+	private _target = _targets select _targetIdx;
+
 	//Update objective position to be on the target, so it stays active.
 	_objective setPos getPos _target;
 
