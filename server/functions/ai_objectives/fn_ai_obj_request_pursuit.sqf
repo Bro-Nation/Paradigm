@@ -70,8 +70,15 @@ _objective setVariable ["onTick", {
 	// while other targets nearby are active.
 	private _targetIdx = _targets findIf {!(_x getVariable ["vn_revive_incapacitated", false])};
 
-	// selects the last target in the targets array if everyone is incapacitated
-	// TODO: patrol around or move away?
+	// everyone is incapacitaed, let's patrol the area
+	if (_targetIdx == -1) exitWith {
+		_group setVariable ["orders", ["patrol", getPos ((_objective getVariable "targets") select 0), 50], true];
+	};
+
+	!(((_group getVariable "orders") select 0) isEqualTo "pursue") && {
+		_group setVariable ["orders", ["pursue", (_objective getVariable "targets") select 0], true];
+	};
+
 	private _target = _targets select _targetIdx;
 
 	//Update objective position to be on the target, so it stays active.
