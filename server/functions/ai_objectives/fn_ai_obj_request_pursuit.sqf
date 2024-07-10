@@ -70,15 +70,26 @@ _objective setVariable ["onTick", {
 	// while other targets nearby are active.
 	private _targetIdx = _targets findIf {!(_x getVariable ["vn_revive_incapacitated", false])};
 
-	// everyone is incapacitaed, let's patrol the area
+	// everyone is incapacitated, let's patrol the area or set up an ambush
 	if (_targetIdx == -1) exitWith {
-		_group setVariable ["orders", ["patrol", getPos ((_objective getVariable "targets") select 0), 50], true];
+
+		private _groups = (_objective getVariable "assignedGroups");
+
+		// only change the group's orders if the orders are currently to pursue,
+		// otherwise we've already changed the orders and don't need to do this
+		if (_groups findIf {((_x getVariable "orders") select 0) isEqualTo "pursue"} > -1) then {
+			
+			// 50% chance of switching to either patrol or ambush behaviour when all players are incap
+			private _newOrders = selectRandom [
+				["patrol", getPos ((_objective getVariable "targets") select 0), 50],
+				["ambush", getPos ((_objective getVariable "targets") select 0)]
+			];
+
+			_groups apply {_x setVariable ["orders", _newOrders, true]};
+		};
 	};
 
-	!(((_group getVariable "orders") select 0) isEqualTo "pursue") && {
-		_group setVariable ["orders", ["pursue", (_objective getVariable "targets") select 0], true];
-	};
-
+	// selects the last target in the targets array if everyone else is incapacitated
 	private _target = _targets select _targetIdx;
 
 	//Update objective position to be on the target, so it stays active.

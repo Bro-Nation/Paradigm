@@ -35,10 +35,14 @@ if !(_currentAmbush isEqualTo _ambushPos) then {
 private _ambushTriggered = _group getVariable ["ambushTriggered", false];
 private _areaSize = 100;
 
-if (!_ambushTriggered && {!(playableUnits inAreaArray [_ambushPos, _areaSize, _areaSize, 0, false] isEqualTo [])}) then {
+if (!_ambushTriggered && {
+	!(
+		playableUnits select {(_x getVariable ["vn_revive_incapacitated", false])} 
+		inAreaArray [_ambushPos, _areaSize, _areaSize, 0, false] isEqualTo []
+	)
+}) then {
 	_ambushTriggered = true;
 	_group setVariable ["ambushTriggered", true];
-
 };
 
 if (_ambushTriggered) exitWith {
