@@ -19,7 +19,6 @@
 
 
 params ["_hitObject"];
-// systemchat "HAMMER";
 
 private _building = _hitObject getVariable ["para_g_building", objNull];
 
@@ -34,3 +33,14 @@ if (player getUnitTrait "increasedBuildRate") then {_buildRate = 0.5};
 
 ["building_on_hit", [_building, -_buildRate]] call para_c_fnc_call_on_server;
 
+/*
+DO NOT DELETE ME!
+
+IMPORTANT: @dijksterhuis: this `false` is 100% necessary to ensure we
+return some boolean value to the scripted event handler code in fn_tool_controller_init.sqf!
+
+without this we get a really nasty recursion bug where using the hammer will cause the
+building to repeatedly decrease in build state after one hit (because the scripted event
+handler keeps failing because of no return value!)
+*/
+false

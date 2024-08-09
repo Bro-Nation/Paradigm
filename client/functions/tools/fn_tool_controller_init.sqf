@@ -16,6 +16,13 @@
         [] call para_c_fnc_tool_controller_init
 */
 
+/*
+this scripted event handler is called by the CDLC's `vn_fnc_melee_fired` function
+is under VN --> vn_melee_functions -> melee_fired
+
+value returned by BIS_fnc_callScriptedEventHandler executing the below is used in
+there to check whether melee damage needs to be applied somehow.
+*/
 
 [missionNamespace, "vn_melee_attack", {
     params ["_unit", "_hitPos", "_hitObject"];
