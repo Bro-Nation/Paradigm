@@ -22,3 +22,6 @@ localNamespace setVariable ["para_l_scheduler_initialised", true];
 
 call para_g_fnc_scheduler_start;
 0 spawn para_g_fnc_scheduler_monitor;
+
+// print debug logs
+debugScheduler = true;

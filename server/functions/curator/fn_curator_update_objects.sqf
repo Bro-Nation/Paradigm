@@ -1,5 +1,5 @@
 /*
-	File: fn_init_curators_update_objects_job.sqf
+	File: fn_curator_update_objects.sqf
 	Author: 'DJ' Dijksterhuis
 	Public: No
 
@@ -13,7 +13,7 @@
 		Nothing
 
 	Example(s):
-		[5] call para_s_fnc_init_curators_update_objects_job;
+		[5] call para_s_fnc_curator_update_objects;
 */
 
 params [["_tickDelay", 5]];
