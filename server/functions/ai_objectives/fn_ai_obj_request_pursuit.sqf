@@ -65,31 +65,55 @@ _objective setVariable ["onTick", {
 		[_objective] call para_s_fnc_ai_obj_finish_objective;
 	};
 
-	// try to focus on a target that's not incapacitated with vn_revive.
-	// want to avoid AI standing around targets that are incapacitated
-	// while other targets nearby are active.
+	/*
+	try to focus on a target that's not incapacitated with vn_revive.
+	want to avoid AI standing around targets that are incapacitated
+	while other targets nearby are active.
+	*/
 	private _targetIdx = _targets findIf {!(_x getVariable ["vn_revive_incapacitated", false])};
 
-	// everyone is incapacitated, let's patrol the area or set up an ambush
+	/*
+	everyone is incapacitated, let's patrol the area or set up an ambush
+	select all groups that have 'pursuit' orders and update the orders to
+	random choice between patrol/ambush
+
+	orders reset back to 'pursuit' once any target player is no longer incap
+        --> see the `forEach` at the end of `onTick`
+	*/
+
 	if (_targetIdx == -1) exitWith {
 
-		private _groups = (_objective getVariable "assignedGroups");
+		(_objective getVariable "assignedGroups") select {
 
-		// only change the group's orders if the orders are currently to pursue,
-		// otherwise we've already changed the orders and don't need to do this
-		if (_groups findIf {((_x getVariable "orders") select 0) isEqualTo "pursue"} > -1) then {
-			
-			// 50% chance of switching to either patrol or ambush behaviour when all players are incap
+			/*
+			new groups can be created with a pursuit objective while
+			existing groups have already switched
+			*/
+
+			private _ordersString = (_x getVariable "orders") select 0;
+			_ordersString isEqualTo "pursue";
+		} apply {
+
+			/*
+			update orders for each group with a random selection
+			ideally we would want all groups to be ambush or patrol
+			but this works for now
+
+			position based on the first player in the targets array
+			so newly spawned groups should move towards the incap players anyway
+			*/
+
+			private _targets = _objective getVariable "targets";
 			private _newOrders = selectRandom [
-				["patrol", getPos ((_objective getVariable "targets") select 0), 50],
-				["ambush", getPos ((_objective getVariable "targets") select 0)]
+				["patrol", getPos (_targets select 0), 50],
+				["ambush", getPos (_targets select 0)]
 			];
 
-			_groups apply {_x setVariable ["orders", _newOrders, true]};
+			_x setVariable ["orders", _newOrders, true];
 		};
 	};
 
-	// selects the last target in the targets array if everyone else is incapacitated
+	// pursuit objective -- AI objective target pos is first non-incap target player
 	private _target = _targets select _targetIdx;
 
 	//Update objective position to be on the target, so it stays active.
