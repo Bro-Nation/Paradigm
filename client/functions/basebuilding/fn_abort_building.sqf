@@ -34,4 +34,9 @@ if (!isNil "para_l_placing_click_handler") then {
 	para_l_placing_click_handler = nil;
 };
 
+if (!isNil "para_l_placing_keyrotate_handler") then {
+	(findDisplay 46) displayRemoveEventHandler ["KeyDown", para_l_placing_keyrotate_handler];
+	para_l_placing_keyrotate_handler = nil;
+};
+
 false;

@@ -95,50 +95,6 @@ private _objectivesWithPriority = [];
 		};
 	} forEach para_s_ai_obj_priority_radii;
 
-	/*
-	@dijksterhuis
-
-	HACK: pursuit objectives distance to player is ALWAYS within
-	the minimum `para_s_ai_obj_priority_radii` radius, so pursuit
-	objectives always end up highest priority.
-
-	instead of Mike Force sites being occupied by AI, or Mike Force
-	base attacks being an onslaught, we end up with a bunch of tracker
-	teams starving the AO of any defenses.
-
-	so force tracker team objectives to be priority 1 instead of 0
-	--> release tracker teams from player groups when all other
-	objectives are higher priority
-
-	with default configurations, this should mean when players are
-	within 300m of a site (minimum default value for
-	`para_s_ai_obj_priority_radii`), tracker teams should will back
-	off and give players some breathing room, before they encounter
-	a site and have to attack it. additionally, this gives the AI
-	tasked with defending the site time to move into the site to
-	defend it.
-
-	at the start of a mike force AO/Zone, this should mean AI will
-	start off by tracking palyers on the edge of the zone, then
-	reinforcing sites when players get closer.
-
-	TODO: attack objectives, similar to pursuit objectives, are always
-	highest priority.
-
-	for us to gain some room for other AI objective types (example:
-	defending an officer etc that spike tema need to go out and kill)
-	we can also set the attack types to priority 1 by default.
-
-	but i'm leaving this as is for now to test the pursuit changes
-	independently.
-
-	currently, if anyone steps out of the FOB during an attack then
-	they might get a bit bored due to tracker teams being deprioritised
-	versus attack objectives, but that's a consequence for the player
-	for going off-piste and lone-wolfing.
-	*/
-	if ((_obj getVariable "type") == "pursue") then {_priority = 1};
-
 	_objectivesWithPriority pushBack [_priority, _obj];
 	_obj setVariable ["priority", _priority];
 } forEach para_s_ai_obj_active_objectives;
