@@ -30,6 +30,8 @@ class para_s
 		class ai_obj_get_objective_by_id {};
 		class ai_obj_give_group_ownership {};
 		class ai_obj_job {};
+		class ai_obj_job_v2 {};
+		class ai_obj_job_v3 {};
 		class ai_obj_reinforce {};
 		class ai_obj_objective_reinforcements_full_strength_unit_quantity {};
 		class ai_obj_request_ambush {};

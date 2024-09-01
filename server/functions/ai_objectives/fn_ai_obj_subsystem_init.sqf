@@ -37,4 +37,13 @@ para_s_ai_obj_maxPursuitDistance = 1200;
 
 addMissionEventHandler ["EntityKilled", para_s_fnc_ai_obj_entity_killed_update_reinforcements];
 
-["ai_manager", para_s_fnc_ai_obj_job, [], 5] call para_g_fnc_scheduler_add_job;
+para_s_ai_obj_version = "v3";
+para_s_ai_obj_debug = false;
+
+["ai_manager", call {
+	switch (true) do { 
+		case (para_s_ai_obj_version isEqualTo "v3") : {para_s_fnc_ai_obj_job_v3}; 
+		case (para_s_ai_obj_version isEqualTo "v2") : {para_s_fnc_ai_obj_job_v2};
+		default {para_s_fnc_ai_obj_job}; 
+	};
+}, [], 5] call para_g_fnc_scheduler_add_job;
