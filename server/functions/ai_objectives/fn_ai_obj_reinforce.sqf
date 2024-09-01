@@ -17,9 +17,11 @@
     Example(s):
 		[_myObjective, 30, _nearestPool] call para_s_fnc_ai_obj_reinforce;
 */
-params ["_objective", "_unitCount", ["_players", allPlayers select {side _x != east}]];
+params ["_objective", "_unitCount"];
 
 private _objectivePos = getPos _objective;
+
+private _players = [] call para_s_fnc_ai_obj_get_valid_player_units;
 
 //Can we do a direct reinforce, or are players too close?
 private _blockDirectRange = para_s_ai_obj_reinforce_block_direct_spawn_range;
@@ -73,7 +75,8 @@ private _units = [];
 } forEach _units;
 
 // Record spawned units for the objective, so we can reference later and avoid over-spawning units.
-_objective setVariable ["spawnedUnits", ((_objective getVariable "spawnedUnits") - [objNull]) + _units];
+private _spawned_units_count = (_objective getVariable ["spawnedUnitsCount", 0]) + (count _units);
+_objective setVariable ["spawnedUnitsCount", _spawned_units_count];
 
 {
 	[_x, _objective] call para_s_fnc_ai_obj_assign_to_objective;

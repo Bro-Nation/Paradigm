@@ -19,7 +19,7 @@
 - [TWEAK] Not in vehicle travelling over 200 km/h (down from SGD upstream 300 km/h)
 - [ADD] Not dac cong (assumption that side east == dac cong)
 */
-private _allPlayers = allUnits select {isPlayer _x && {!(_x isKindOf "HeadlessClient_F")} && !(vehicle _x isKindOf "Plane") && (speed vehicle _x < 200) && !(side _x == east)};
+private _allPlayers = [] call para_s_fnc_ai_obj_get_valid_player_units;
 
 //Groups of AI that are no longer in use by the system.
 //We can reuse these for other objectives later.
@@ -188,7 +188,7 @@ private _assignedUnitFlex = 4;
 	private _playerCount = _obj getVariable "nearby_player_count";
 	private _desiredUnitCount = _obj getVariable "desired_unit_count";
 
-	private _availableReinforcements = [_obj] call para_s_fnc_ai_obj_available_reinforcements; 
+	private _availableReinforcements = [_obj] call para_s_fnc_ai_obj_available_reinforcements;
 
 	private _totalAliveUnits = _obj getVariable "total_alive_units";
 	private _squadSize = _obj getVariable "squad_size";

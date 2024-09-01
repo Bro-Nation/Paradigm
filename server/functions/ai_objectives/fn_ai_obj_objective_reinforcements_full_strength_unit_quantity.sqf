@@ -18,6 +18,8 @@
 
 params ["_objective"];
 
-private _desiredSimultaneousUnitCount = [allPlayers, _objective getVariable "scaling_factor"] call para_g_fnc_ai_scale_to_player_count;
+private _players = [] call para_s_fnc_ai_obj_get_valid_player_units;
+
+private _desiredSimultaneousUnitCount = [_players, _objective getVariable "scaling_factor"] call para_g_fnc_ai_scale_to_player_count;
 
 _desiredSimultaneousUnitCount * para_s_ai_obj_reinforcement_scaling * (_objective getVariable "reinforcements_factor") max 0

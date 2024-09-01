@@ -29,7 +29,14 @@ private _objective = _entity getVariable "spawningObjective";
 
 if (isNil "_objective") exitWith {};
 
+private _objReinforcementsRemain = _objective getVariable ["reinforcements_remaining", 1];
+private _objReinforcementsFullStrength = [_objective] call para_s_fnc_ai_obj_objective_reinforcements_full_strength_unit_quantity;
+
 _objective setVariable [
 	"reinforcements_remaining", 
-	(_objective getVariable ["reinforcements_remaining", 1]) - (1 / (_objective call para_s_fnc_ai_obj_objective_reinforcements_full_strength_unit_quantity)) max 0
+	0 max (
+		_objReinforcementsRemain - (1 / (_objReinforcementsFullStrength))
+	)
 ];
+
+nil;
