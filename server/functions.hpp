@@ -174,11 +174,24 @@ class para_s
 		PARA_SERVER_PATH(\init);
 		class init_server { postInit = 1; };
 		class init_player {};
-		class init_curators {};
-		class init_curators_update_objects_job {};
 		class init_whitelist {};
 		class init_dopemine {};
 		class postinit_player {};
+	};
+
+	class curator
+	{
+		PARA_SERVER_PATH(\curator);
+		class curator_populate {};
+		class curator_update_objects {};
+		class curator_mod_check {};
+		class curator_init_eh {};
+
+		class curator_eh_enter {};
+		class curator_eh_exit {};
+		class curator_eh_connect {};
+		class curator_eh_disconnect {};
+		class curator_eh_log {};
 	};
 
 	class load_balancer

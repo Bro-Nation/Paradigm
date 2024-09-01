@@ -55,9 +55,7 @@ para_l_schedulerHandle = [] spawn {
 			if ((_tickTime - _lastTickTime) > _tickDelay && {_remainingIterations != 0}) then
 			{
 				//If debug scheduler is enabled, dump the jobs to the log file.
-				if (!isNil "debugScheduler") then {
-					["SCHEDULER: Job running - %1", _jobId] call BIS_fnc_logFormat;
-				};
+				private _startTime = diag_tickTime;
 
 				//So, this'll work for infinite iterations too - we'll keep decrementing -1. Not sure I see a need to change it.
 				_remainingIterations =	_remainingIterations - 1;
@@ -69,8 +67,16 @@ para_l_schedulerHandle = [] spawn {
 				call compile format ["isNil {'%1'}", _jobId];
 				_parameters call _code;
 
-				if (!isNil "debugScheduler") then {
-					diag_log format ["SCHEDULER: Job iteration done - %1", _jobId];
+				private _endTime = diag_tickTime;
+				private _timeTaken = _endTime - _startTime;
+				if (isServer && {!(isNil "debugScheduler") && {_timeTaken > 0}}) then {
+					diag_log format [
+						"SCHEDULER: Job done - jobId=%1 start=%2 end=%3 timeTaken=%4",
+						_jobId,
+						_startTime,
+						_endTime,
+						_timeTaken
+					];
 				};
 
 				//Reload the iterations, in case the code has modified it.
