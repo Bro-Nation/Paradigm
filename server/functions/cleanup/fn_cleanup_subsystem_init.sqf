@@ -39,6 +39,10 @@ para_s_cleanup_items_time_check = [];
 
 ["cleanup", {call para_s_fnc_cleanup_job}, [], 5] call para_g_fnc_scheduler_add_job;
 
+/*
+// disabled by @dijksterhuis as part of PR #39
+// see paradigm\global\functions\create\fn_create_unit.sqf
+
 if (para_s_cleanup_clean_dropped_gear) then {
 	addMissionEventHandler ["EntityKilled", {
 		params ["_unit"];
@@ -50,3 +54,4 @@ if (para_s_cleanup_clean_dropped_gear) then {
 		};
 	}];
 };
+*/
