@@ -19,6 +19,26 @@
 
 params ["_group", "_target"];
 
-if (isNull _target || ! (alive _target) || (vehicle _target isKindOf "air") || (leader _group distance2D _target > 1000)) exitWith {false};
+// NOTE: @dijksterhuis: this is the inverse of how SGD does it.
+// I find AND statements easier to debug rather than negating a
+// bunch of OR statements
 
-true
+if (
+    !(isNull _target)
+    && {
+        (alive _target)
+    && {
+        !(vehicle _target isKindOf "air")
+    && {
+        !(leader _group distance2D _target > 1500)
+    && {
+        // not incap or is incap but has rolled over
+        !([_target] call para_g_fnc_unit_is_incapacitated)
+        || ([_target] call para_g_fnc_unit_is_incapacitated_and_rolled)
+    }
+    }
+    }
+    }
+) exitWith {true};
+
+false;

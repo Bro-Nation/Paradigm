@@ -228,6 +228,7 @@ class para_g
 		class parse_pos_config {};
 		class vehicle_will_collide_at_pos {};
 		class unit_is_incapacitated {};
+		class unit_is_incapacitated_and_rolled {};
 	};
 	class tools
 	{

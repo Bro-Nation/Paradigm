@@ -37,8 +37,15 @@ private _areaSize = 100;
 
 if (!_ambushTriggered && {
 	!(
-		playableUnits select {(_x getVariable ["vn_revive_incapacitated", false])} 
-		inAreaArray [_ambushPos, _areaSize, _areaSize, 0, false] isEqualTo []
+		playableUnits
+			select {
+				// (_x getVariable ["vn_revive_incapacitated", false])
+				[_group, _x] call para_g_fnc_behaviour_is_valid_target;
+			}
+			inAreaArray [
+				_ambushPos, _areaSize, _areaSize, 0, false
+			]
+			isEqualTo []
 	)
 }) then {
 	_ambushTriggered = true;
