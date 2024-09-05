@@ -96,27 +96,28 @@ _objective setVariable ["onTick", {
 	*/
 	if (_targetIdx == -1) exitWith {
 
-		private _targetsRaw = _objective getVariable "targets";
+		// Update objective position to be on the target, so it stays active.
+		_objective setPos getPos (_targets select 0);
 
 		/*
 		***************************************************************
 		conditional update depending on the first time we switch orders.
+		means all the groups for this switch over of orders will always
+		switch to the same behaviour (ambush or patrol).
 
-		means all the groups for this objective will always switch over
-		to the same behaviour (ambush or patrol) because we really only
-		set this the first time this code executes on this objective.
+		(or it should be, it seems sometimes one or two grups manage to
+		get the other order :/)
 		***************************************************************
 		*/
 
 		private _modifiedOrders = _objective getVariable [
 			"ordersModified",
 			selectRandom [
-				["ambush", getPos (_targetsRaw select 0)],
-				["patrol", getPos (_targetsRaw select 0), 20 + (random 60)]
+				["ambush", getPos (_targets select 0)],
+				["patrol", getPos (_targets select 0), 20 + (random 60)]
 			]
 		];
 		_objective setVariable ["ordersModified", _modifiedOrders];
-
 
 		/*
 		***************************************************************
@@ -125,9 +126,12 @@ _objective setVariable ["onTick", {
 
 		this should safely pick up new groups as they're added and
 		switch their orders
+
 		***************************************************************
 		force the group to come out of base arma combat behaviour.
-		makes the group reliably switch behaviour to patrol/ambush.
+		makes the group (more) reliably switch behaviour to patrol/ambush.
+		this doesn't work 100% of the time, but it works enough to be
+		reliable.
 
 		> Applying combat mode blue, clears the attack target
 		> commands from AI subgroups
@@ -140,7 +144,8 @@ _objective setVariable ["onTick", {
 		the AI will often run onto a newly incapped player first, but
 		this is the best i can do.
 
-		then finally apply the new orders, which the group can now pick
+		***************************************************************
+		finally apply the new orders, which the group can now pick
 		up because we fully reset the combat mode.
 
 		***************************************************************
@@ -153,26 +158,18 @@ _objective setVariable ["onTick", {
 		***************************************************************
 		*/
 
-		(_objective getVariable "assignedGroups")
-			select {
-				((_x getVariable "orders") select 0) isEqualTo "pursue";
-			}
-			apply {
-				if (combatMode _x != "WHITE") then {
-					_x setCombatMode "BLUE";
-					// group will now always switch to new orders now
-					_x setCombatMode "WHITE";
-				};
-
-				_x setVariable [
-					"orders",
-					(_objective getVariable "ordersModified"),
-					true
-				];
-
-			}
-		;
+	(_objective getVariable "assignedGroups")
+		select {((_x getVariable "orders") select 0) isEqualTo "pursue"}
+		select {combatMode _x isNotEqualTo "WHITE"}
+		apply {
+			_x setCombatMode "BLUE";
+			_x setCombatMode "WHITE";
+			_x setVariable ["orders", ["ambush", getPos (_targets select 0)], true];
+		};
 	};
+
+	// switch off any alternative orders
+	_objective setVariable ["ordersModified", nil];
 
 	// pursuit objective -- AI objective target pos is first non-incap target player
 	private _target = _targets select _targetIdx;
@@ -189,11 +186,28 @@ _objective setVariable ["onTick", {
 	***************************************************************
 	Update squad targets
 
-	NOTE: When all targets were previously incap, and one is not incap now,
-	this line switches all the AI pursuit groups out of 'patrol' and back into
-	'pursue' mode
+	When all targets were previously incap, and one is not incap
+	now, this line switches all the AI pursuit groups out of the
+	custom orders above and back into 'pursue' orders.
+
+	when switching orders back from the modified section above:
+
+		- 'patrol' groups will be slow to react/update waypoints,
+		giving the player time to get away
+
+		- 'ambush' groups will react quickly, starting to give chase
+		very quickly, giving the player less time to get away.
 	***************************************************************
 	*/
+
+	(_objective getVariable "assignedGroups")
+		select {((_x getVariable "orders") select 0) isNotEqualTo "pursue"}
+		select {combatMode _x isNotEqualTo "WHITE"}
+		apply {
+			_x setCombatMode "BLUE";
+			_x setCombatMode "WHITE";
+		};
+
 	(_objective getVariable "assignedGroups")
 		apply {_x setVariable ["orders", ["pursue", _target], true]};
 }];
