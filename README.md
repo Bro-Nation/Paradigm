@@ -1,5 +1,3 @@
-# Paradigm
-
 Paradigm is a library that can be either inserted into a mission or installed as a mod. 
 It provides a variety of nearly plug-and-play features for use in custom missions, as well as utility functions to speed up mission development.
 
