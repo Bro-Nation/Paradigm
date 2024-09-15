@@ -260,5 +260,6 @@ class para_s
 		PARA_SERVER_PATH(\tools);
 		class fell_tree {};  // needs to stay on server
 		class fell_tree_initial {};
+		class tools_wrench_hit_object {};
 	};
 };

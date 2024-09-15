@@ -47,7 +47,8 @@
         
         case "vn_m_wrench_01":
         {
-        	[_hitObject] call para_c_fnc_operate_wrench;
+            [_hitObject, player] remoteExec ["para_s_tools_wrench_hit_object", 2];
+        	// [_hitObject] call para_c_fnc_operate_wrench;
         };
     };
 
