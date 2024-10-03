@@ -10,7 +10,7 @@ for "_i" from 1 to 5 do
 	};
 };
 
-private _query = format ["SELECT user_id FROM curators WHERE server_number = %1", _serverNumber];
+private _query = format ["SELECT SteamID FROM curators WHERE server_number = %1", _serverNumber];
 private _queryResult = [_query, 2, true] call para_s_fnc_db_query;
 
 private _result = [];

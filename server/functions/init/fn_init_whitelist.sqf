@@ -5,7 +5,7 @@ private _teams = (missionConfigFile >> "gamemode" >> "teams") call BIS_fnc_getCf
 	private _isDefaultTeam = _name in ["MikeForce", "ACAV", "GreenHornets", "SpikeTeam"];
 	if(!_isDefaultTeam) then {
 
-		private _query = format ["SELECT user_id FROM users WHERE %1 >= 1", _name];
+		private _query = format ["SELECT SteamID FROM users WHERE %1 >= 1", _name];
 		private _queryResult = [_query, 2, true] call para_s_fnc_db_query;
 
 		private _result = [];
