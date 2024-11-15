@@ -185,12 +185,9 @@ class para_s
 		class curator_populate {};
 		class curator_update_objects {};
 		class curator_mod_check {};
-		class curator_init_eh {};
 
 		class curator_eh_enter {};
 		class curator_eh_exit {};
-		class curator_eh_connect {};
-		class curator_eh_disconnect {};
 		class curator_eh_log {};
 	};
 

@@ -30,7 +30,9 @@ if (getNumber (missionConfigFile >> "use_paradigm_init") <= 0) exitWith {};
 	[] call _fnc_initServer;
 	diag_log format ["Paradigm: Serverside initialisation completed in %1 seconds", (diag_tickTime - _startTime) toFixed 1];
 	
-	call para_s_fnc_curator_init_eh;
+	call para_s_fnc_curator_eh_enter;
+	call para_s_fnc_curator_eh_exit;
+	call para_s_fnc_curator_eh_log;
 
 	diag_log "Paradigm: Curator EHs initialized.";
 
