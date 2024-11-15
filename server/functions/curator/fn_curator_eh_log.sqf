@@ -8,10 +8,6 @@
 ["CuratorLog", {
 	params ["_curator", "_string", "_params"];
 
-	private _curators = missionNamespace getVariable ["curatorsInUI", []];
-
-	if (!(_curator in _curators)) exitWith {};
-
 	if (typeName _params != "ARRAY") then {
 		_params = [];
 	};
