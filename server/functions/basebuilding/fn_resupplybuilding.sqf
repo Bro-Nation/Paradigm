@@ -95,6 +95,27 @@ if (_resupplyType == "MULTISANDBAG" && _supplyType == "BuildingSupplies") then {
 //No supplies, no point continuing execution.
 if (_supplies == 0) exitWith {};
 
+private _currentSupplies = _supplySource getVariable ["para_g_current_supplies", 0];
+private _supplyConsumptionRate = _supplySource getVariable ["para_g_supply_consumption_rate", 1];
+
+private _proposedSuppliesSum = _currentSupplies + _supplies;
+private _proposedRemainingTimeSeconds = _proposedSuppliesSum / _supplyConsumptionRate;
+private _maxTimeLimit = 7200; // max time limit a building can have, 2 hours in seconds
+
+// Check if the current lifetime would exceed the time limit
+
+if ( _proposedRemainingTimeSeconds >= _maxTimeLimit) then {
+	// if the supplies that are being added will exceed 2 hours for the building,...
+	// trim the supplies so that it only reaches 2 hours max. This will still consume the item!!!
+
+	_supplies = (_maxTimeLimit * _supplyConsumptionRate) - _currentSupplies;
+
+	// notify players that time limit has been reached and item was still consumed
+	// executes the notification on the client of the specific player who has done the resupply
+	["TaskFailed",["",localize "STR_para_build_maxtimereached"]] remoteExecCall ["para_c_fnc_show_notification", _player];
+};
+
+
 [_building, -_supplies, true] call para_s_fnc_building_consume_supplies;
 
 _supplySource getVariable "para_g_current_supplies"
