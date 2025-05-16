@@ -37,6 +37,9 @@ _unit setSkill ["spotDistance", 1];
 _unit setSkill ["spotTime", 1];
 _unit setSkill ["aimingAccuracy", 0.10];
 
+_unit removeItem "vn_rpg2";
+_unit removeItem "vn_rpg7";
+
 _unit addEventHandler ["Killed", {
 	params ["_unit"];
 	[_unit] call para_s_fnc_cleanup_add_items;
