@@ -37,8 +37,15 @@ _unit setSkill ["spotDistance", 1];
 _unit setSkill ["spotTime", 1];
 _unit setSkill ["aimingAccuracy", 0.10];
 
-_unit removeItem "vn_rpg2_mag";
-_unit removeItem "vn_rpg7_mag";
+{
+	switch (_x) do {
+		case "vn_rpg2_mag"; 
+		case "vn_rpg7_mag";
+		case "vn_rpg7_fused_mag": {
+			_unit removeItem _x;
+		};
+	};
+} forEach backpackItems _unit;
 
 _unit addEventHandler ["Killed", {
 	params ["_unit"];
