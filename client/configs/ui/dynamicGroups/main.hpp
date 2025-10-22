@@ -89,6 +89,30 @@ class para_RscDisplayDynamicGroups
             text = "$STR_A3_RscDisplayDynamicGroups_Button_Promote";
             colorText[] = PARA_C_DYNAMICGROUPS_COLOR_DEFAULT_CONFIG;
         };
+//Daves UI Buttons for Insignia change
+        class ButtonNextInsignia : para_RscButton
+        {
+            idc = PARA_C_DYNAMICGROUPS_NEXTINSIGNIA_IDC;
+            x = UIW(14.5);
+            y = UIH(7);
+            w = UIW(2);
+            h = UIH(1.4);
+            text = "Next";
+            colorText[] = PARA_C_DYNAMICGROUPS_COLOR_DEFAULT_CONFIG;
+            onButtonClick = "['CycleNextInsignia'] call (missionNamespace getVariable ['para_c_fnc_dynamicGroups', {}]);";
+        };
+        class ButtonPrevInsignia : para_RscButton
+        {
+            idc = PARA_C_DYNAMICGROUPS_PREVINSIGNIA_IDC;
+            x = UIW(14.5);
+            y = UIH(4);
+            w = UIW(2);
+            h = UIH(1.4);
+            text = "Prev";
+            colorText[] = PARA_C_DYNAMICGROUPS_COLOR_DEFAULT_CONFIG;
+            onButtonClick = "['CyclePrevInsignia'] call (missionNamespace getVariable ['para_c_fnc_dynamicGroups', {}]);";
+        };
+//Dave End
         class SectionManage : para_RscControlsGroupNoScrollbarHV 
         {
             idc = PARA_C_DYNAMICGROUPS_SECTIONMANAGE_IDC;

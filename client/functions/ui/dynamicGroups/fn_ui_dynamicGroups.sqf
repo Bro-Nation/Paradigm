@@ -36,6 +36,12 @@ switch _mode do
 		private ["_display"];
 		_display = _params select 0;
 
+		//Load Insignia
+		private _group = group player;
+		private _insignia = _group getVariable [PARA_C_DYNAMICGROUPS_GROUP_INSIGNIA_VAR, ""];
+		if (_insignia != "") then {[player, _insignia] call BIS_fnc_setUnitInsignia;};
+
+		
 		// Store
 		uiNamespace setVariable [PARA_C_DYNAMICGROUPS_UI_DISPLAY_VAR, _display];
 

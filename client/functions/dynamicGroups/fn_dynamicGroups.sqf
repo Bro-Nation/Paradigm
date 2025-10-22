@@ -1316,7 +1316,8 @@ switch (_mode) do
 
         [_displayName, _texture, _author];
     };
-
+//Old Load Random Insignia on group creation    
+/*
     case "LoadRandomInsignia" :
     {
         private "_insignias";
@@ -1324,6 +1325,128 @@ switch (_mode) do
         _insignias = _insignias - [PARA_C_DYNAMICGROUPS_DEFAULT_INSIGNIA];
         _insignias call bis_fnc_selectRandom;
     };
+*/   
+//Daves Insignia Buttons
+    case "LoadRandomInsignia":
+    {
+        private ["_insignias", "_index"];
+
+        // Load and clean insignias
+        _insignias = ["LoadInsignias"] call GROUPS;
+        _insignias = _insignias - [PARA_C_DYNAMICGROUPS_DEFAULT_INSIGNIA];
+
+        // Store them globally so other buttons can use them
+        missionNamespace setVariable ["CachedInsignias", _insignias];
+
+        // Get current index (or start from 0 if not defined yet)
+        _index = missionNamespace getVariable ["CurrentInsigniaIndex", 0];
+
+        // Select insignia at current index
+        private _selected = _insignias select _index;
+
+        // Don't increment the index here – just return the selected one
+        missionNamespace setVariable ["CurrentInsigniaIndex", _index];
+        _selected
+    };
+
+    case "CycleNextInsignia":
+    {
+        private ["_insignias", "_index", "_group"];
+
+        // Get insignias from cache or load once if needed
+        _insignias = missionNamespace getVariable ["CachedInsignias", []];
+
+        // Safety check
+        private _n = count _insignias;
+        if (_n <= 0) exitWith { systemChat "No insignias available."; };
+
+        // Get current index safely
+        _index = missionNamespace getVariable ["CurrentInsigniaIndex", 0];
+        if !(typeName _index isEqualTo "SCALAR") then { _index = 0; };
+        _index = floor _index mod _n;
+
+        // Select current insignia and advance index
+        private _selected = _insignias select _index;
+        _index = (_index + 1) mod _n;
+        missionNamespace setVariable ["CurrentInsigniaIndex", _index];
+
+        systemChat format ["CurrentInsigniaIndex = %1 / %2", _index, _n];
+
+        // Apply to player’s group
+        _group = group player;
+        _group setVariable [PARA_C_DYNAMICGROUPS_GROUP_INSIGNIA_VAR, _selected, true];
+
+        // Apply to all group members (so they all update)
+        {
+            ["OnPlayerGroupChanged", [_x, _group]] call GROUPS;
+        } forEach units _group;
+
+        // Update the preview icon in UI
+        private _display = uiNamespace getVariable [PARA_C_DYNAMICGROUPS_UI_DISPLAY_VAR, displayNull];
+        if (!isNull _display) then {
+            private _ctrlIcon = _display displayCtrl PARA_C_DYNAMICGROUPS_GROUPICON_IDC;
+            if (!isNull _ctrlIcon) then {
+                if (_selected isEqualType []) then {
+                    _ctrlIcon ctrlSetText (_selected select 1);
+                } else {
+                    _ctrlIcon ctrlSetText _selected;
+                };
+            };
+        };
+
+        // Debug feedback
+        systemChat format ["Insignia changed to %1", (if (_selected isEqualType []) then {_selected select 0} else {_selected})];
+    };
+
+    case "CyclePrevInsignia" :
+    {
+        private ["_insignias", "_index", "_group"];
+
+        // Get insignias from cache or load once if needed
+        _insignias = missionNamespace getVariable ["CachedInsignias", []];
+
+        // Safety check
+        private _n = count _insignias;
+        if (_n <= 0) exitWith { systemChat "No insignias available."; };
+
+        // Get current index safely
+        _index = missionNamespace getVariable ["CurrentInsigniaIndex", 0];
+        if !(typeName _index isEqualTo "SCALAR") then { _index = 0; };
+        _index = floor _index mod _n;
+
+        // Select current insignia and advance index
+        private _selected = _insignias select _index;
+        _index = (_index - 1 + _n) mod _n;
+        missionNamespace setVariable ["CurrentInsigniaIndex", _index];
+
+        systemChat format ["CurrentInsigniaIndex = %1 / %2", _index, _n];
+
+        // Apply to player’s group
+        _group = group player;
+        _group setVariable [PARA_C_DYNAMICGROUPS_GROUP_INSIGNIA_VAR, _selected, true];
+
+        // Apply to all group members (so they all update)
+        {
+            ["OnPlayerGroupChanged", [_x, _group]] call GROUPS;
+        } forEach units _group;
+
+        // Update the preview icon in UI
+        private _display = uiNamespace getVariable [PARA_C_DYNAMICGROUPS_UI_DISPLAY_VAR, displayNull];
+        if (!isNull _display) then {
+            private _ctrlIcon = _display displayCtrl PARA_C_DYNAMICGROUPS_GROUPICON_IDC;
+            if (!isNull _ctrlIcon) then {
+                if (_selected isEqualType []) then {
+                    _ctrlIcon ctrlSetText (_selected select 1);
+                } else {
+                    _ctrlIcon ctrlSetText _selected;
+                };
+            };
+        };
+
+        // Debug feedback
+        systemChat format ["Insignia changed to %1", (if (_selected isEqualType []) then {_selected select 0} else {_selected})];
+    };
+//Daves End
 
     case "GetInsigniaDisplayName" :
     {
