@@ -32,7 +32,8 @@ private _valid = [
     "\treeparts\", 
     "vegetation_f_vietnam\burned\", 
     "vn_plants_pmc\misc\", 
-    "vegetation_f_vietnam\dried\"
+    "vegetation_f_vietnam\dried\",
+	"\plants\"
 ];
 
 _valid findIf { _x in _path } > -1
