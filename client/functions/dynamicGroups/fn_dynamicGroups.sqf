@@ -1395,7 +1395,7 @@ switch (_mode) do
         };
 
         // Debug feedback
-        systemChat format ["Insignia changed to %1", (if (_selected isEqualType []) then {_selected select 0} else {_selected})];
+        // systemChat format ["Insignia changed to %1", (if (_selected isEqualType []) then {_selected select 0} else {_selected})];
     };
 
     case "CyclePrevInsignia" :
@@ -1444,7 +1444,7 @@ switch (_mode) do
         };
 
         // Debug feedback
-        systemChat format ["Insignia changed to %1", (if (_selected isEqualType []) then {_selected select 0} else {_selected})];
+        // systemChat format ["Insignia changed to %1", (if (_selected isEqualType []) then {_selected select 0} else {_selected})];
     };
 //Daves End
 
