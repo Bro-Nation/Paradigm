@@ -26,6 +26,7 @@
     switch(_tool) do
     {
         case "vn_m_shovel_01";
+        case "vn_b_melee_m43_etool_01";
         case "vn_m_m51_etool_01":
         {
             [_hitObject] call para_c_fnc_operate_shovel;
