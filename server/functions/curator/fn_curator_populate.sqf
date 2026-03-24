@@ -1,23 +1,26 @@
-private _serverNumber = 0;	
+private _serverIP = FETCH_CONST(mf_server_ip);
+private _serverPort = FETCH_CONST(mf_server_port);
 
-for "_i" from 1 to 5 do 
-{ 
-	if ([str(_i), serverName] call BIS_fnc_inString) then
-	{
-		_serverNumber = _i;
-
-		uiNamespace setVariable ["serverNumber", _i];
-	};
-};
-
-private _query = format ["SELECT SteamID FROM curators WHERE server_number = %1", _serverNumber];
-private _queryResult = [_query, 2, true] call para_s_fnc_db_query;
+// Find the curation slot for this server's IP/port
+private _slotQuery = format [
+	"SELECT m.slot FROM curation_server_mapping m JOIN battlemetrics_servers bs ON bs.id = m.server_id WHERE bs.ip_address = '%1' AND bs.port = %2 LIMIT 1",
+	_serverIP, _serverPort
+];
+private _slotResult = [_slotQuery, 2, true] call para_s_fnc_db_query;
 
 private _result = [];
-{
-	private _uid = _x select 0;
-	_result pushBack _uid;
-} forEach _queryResult;
+if (count _slotResult > 0) then {
+	private _slot = (_slotResult select 0) select 0;
+	private _query = format ["SELECT steam_id FROM curation_whitelist WHERE server_%1 = 1", _slot];
+	private _queryResult = [_query, 2, true] call para_s_fnc_db_query;
+
+	{
+		private _uid = _x select 0;
+		_result pushBack _uid;
+	} forEach _queryResult;
+} else {
+	diag_log format ["[!] WARNING: No curation slot mapped for server %1:%2", _serverIP, _serverPort];
+};
 
 diag_log format["[+] Curator UIDs: %1", _result];
 missionNamespace setVariable ["curatorUIDs", _result];
