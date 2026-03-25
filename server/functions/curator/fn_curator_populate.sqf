@@ -1,5 +1,5 @@
-private _serverIP = FETCH_CONST(mf_server_ip);
-private _serverPort = FETCH_CONST(mf_server_port);
+private _serverIP = mf_server_ip;
+private _serverPort = mf_server_port;
 
 // Find the curation slot for this server's IP/port
 private _slotQuery = format [
