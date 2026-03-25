@@ -1,14 +1,14 @@
 private _teams = (missionConfigFile >> "gamemode" >> "teams") call BIS_fnc_getCfgSubClasses;
 
-// Load slot → team mapping from unit_whitelist_mapping + units
-private _mappingQuery = "SELECT m.slot, u.arma_team_name FROM unit_whitelist_mapping m JOIN units u ON u.id = m.unit_id";
+// Load arma_team_name → whitelist_slot mapping from units table
+private _mappingQuery = "SELECT arma_team_name, whitelist_slot FROM units WHERE arma_team_name IS NOT NULL AND whitelist_slot IS NOT NULL";
 private _mappingResult = [_mappingQuery, 2, true] call para_s_fnc_db_query;
 
 // Build hashmap: arma_team_name → slot number
 private _teamSlotMap = createHashMap;
 {
-	private _slot = _x select 0;
-	private _teamName = _x select 1;
+	private _teamName = _x select 0;
+	private _slot = _x select 1;
 	_teamSlotMap set [_teamName, _slot];
 } forEach _mappingResult;
 
