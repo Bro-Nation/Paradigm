@@ -19,7 +19,7 @@ private _teamSlotMap = createHashMap;
 
 		private _slot = _teamSlotMap getOrDefault [_name, -1];
 		if (_slot > 0) then {
-			private _query = format ["SELECT m.steam_id FROM member_whitelist mw JOIN members m ON m.user_id = mw.user_id WHERE mw.team_%1 = 1 AND m.steam_id IS NOT NULL", _slot];
+			private _query = format ["SELECT CAST(m.steam_id AS CHAR) FROM member_whitelist mw JOIN members m ON m.user_id = mw.user_id WHERE mw.team_%1 = 1 AND m.steam_id IS NOT NULL", _slot];
 			private _queryResult = [_query, 2, true] call para_s_fnc_db_query;
 
 			private _result = [];
