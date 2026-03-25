@@ -11,7 +11,7 @@ private _slotResult = [_slotQuery, 2, true] call para_s_fnc_db_query;
 private _result = [];
 if (count _slotResult > 0) then {
 	private _slot = (_slotResult select 0) select 0;
-	private _query = format ["SELECT steam_id FROM curation_whitelist WHERE server_%1 = 1", _slot];
+	private _query = format ["SELECT CAST(steam_id AS CHAR) FROM curation_whitelist WHERE server_%1 = 1", _slot];
 	private _queryResult = [_query, 2, true] call para_s_fnc_db_query;
 
 	{
