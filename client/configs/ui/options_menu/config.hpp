@@ -109,6 +109,25 @@ class para_CfgOptions {
 		type = "Checkbox";
 		default = 0;
 	};
+	class para_earplugVolumeGround {
+		name = "Earplug Volume (On Ground)";
+		tooltip = "Adjust the volume level for earplugs when on the ground.";
+		onChange = "missionNamespace setVariable ['vn_mf_earplugs_volume_ground', _newValue];";
+		type = "Slider";
+		default = 0.5;
+		range[] = {0, 1};
+		step = 0.01;
+	};
+	class para_earplugVolumeVehicle {
+		name = "Earplug Volume (In Vehicle)";
+		tooltip = "Adjust the volume level for earplugs when in a vehicle.";
+		onChange = "missionNamespace setVariable ['vn_mf_earplugs_volume_vehicle', _newValue];";
+		type = "Slider";
+		default = 0.5;
+		range[] = {0, 1};
+		step = 0.01;
+	};
+};
 //     class Test: para_OptionCheckbox {
 //         name = "Test option 1";
 //         tooltip = "This is the test option 1";
@@ -124,4 +143,3 @@ class para_CfgOptions {
 //         tooltip = "This is the test option 3";
 //         variable = "para_test3";
 //     };
-};
