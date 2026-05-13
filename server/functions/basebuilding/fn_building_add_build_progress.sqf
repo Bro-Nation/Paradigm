@@ -18,7 +18,7 @@
         [_building, 1] call para_s_fnc_building_add_build_progress
 */
 
-params ["_building", "_progressChange", ["_updateObjects", true]];
+params ["_building", "_progressChange", ["_updateObjects", true], ["_hasTrait", false]];
 
 private _oldProgress = _building getVariable ["para_g_build_progress", 0];
 private _newProgress = (_oldProgress + _progressChange) min 1 max 0;
@@ -51,8 +51,9 @@ if (_newProgress < 1 && _updateObjects) then
 	} forEach (_building getVariable ["para_g_objects", []]);
 };
 
-//if old progress is zero and gets hammer hit delete the building
-if (_progressChange == -0.5 && _oldProgress == 0) then 
+// If old progress is zero and gets hammer hit delete the building
+// Only trait players can one-hit delete
+if (_progressChange < 0 && _oldProgress == 0 && _hasTrait) then 
 {
 	[_building] call para_s_fnc_building_delete;
 };
