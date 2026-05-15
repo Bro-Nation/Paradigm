@@ -67,7 +67,9 @@ if (isNil "para_c_buildingMenu_features") then
 	private _features = [];
 	{
 		{
-			_features pushBackUnique _x;
+			if (_x != "invulnerable") then {
+				_features pushBackUnique _x;
+			};
 		} forEach (_x select 5);
 	} forEach _allBuildables;
 	para_c_buildingMenu_features = _features;
