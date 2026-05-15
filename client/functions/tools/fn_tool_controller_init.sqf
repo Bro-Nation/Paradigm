@@ -20,7 +20,7 @@
 [missionNamespace, "vn_melee_attack", {
     params ["_unit", "_hitPos", "_hitObject"];
 
-    if(isNull _hitObject) exitWith {};
+    if (isNull _hitObject) exitWith { false };
 
     private _tool = currentWeapon _unit;
     switch(_tool) do
@@ -51,6 +51,8 @@
         	[_hitObject] call para_c_fnc_operate_wrench;
         };
     };
+
+    false
 
 // }] remoteExec ["BIS_fnc_addScriptedEventHandler", 0, true];
 }] call BIS_fnc_addScriptedEventHandler;
