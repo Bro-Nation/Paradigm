@@ -17,15 +17,26 @@
 private _config = missionConfigFile >> "gamemode" >> "buildables";
 private _buildables = "true" configClasses _config;
 private _playerSide = side player;
+private _isMilitaryPolice = player getVariable ["vn_mf_db_player_group", "MikeForce"] isEqualTo "MilitaryPolice";
+
 private _nvaBuildables = _buildables select { 
 	private _categories = getArray (_x >> "categories");
 	"nv" in _categories
+};
+
+private _mpBuildables = _buildables select {
+	private _categories = (getArray (_x >> "categories")) apply {toLower _x};
+	"mp" in _categories
 };
 
 if (_playerSide == east) then {
 	_buildables = _nvaBuildables;
 } else {
 	_buildables = _buildables - _nvaBuildables;
+};
+
+if !(_isMilitaryPolice) then {
+	_buildables = _buildables - _mpBuildables;
 };
 
 private _name = "";

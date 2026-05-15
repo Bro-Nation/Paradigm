@@ -92,6 +92,12 @@ class para_s
 		class bf_maintenance_repair_vehicle {};
 	};
 
+	class building_features_invulnerable
+	{
+		PARA_SERVER_PATH(\building_features\invulnerable);
+		class bf_invulnerable_on_building_objects_changed {};
+	};
+
 	class building_features_radio
 	{
 		PARA_SERVER_PATH(\building_features\radio);
