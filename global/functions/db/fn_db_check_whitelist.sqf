@@ -19,19 +19,41 @@
 params ["_player", "_team"];
 
 private _result = false;
-if !(_team in ["MikeForce", "GreenHornets", "ACAV", "SpikeTeam"]) then
-{
-	private _playerUID = getPlayerUID _player;
-	private _whitelist = missionNamespace getVariable [format ["whitelist_%1", _team], []];
-	private _inWhitelist = _playerUID in _whitelist;
+private _defaultTeams = ["MikeForce", "GreenHornets", "ACAV", "SpikeTeam"];
+private _playerUID = getPlayerUID _player;
 
-	if (_inWhitelist) then {
-		_result = true;
+if (_team isEqualTo "Instructors") then
+{
+	private _inWhitelist = false;
+	{
+		if ((_x find "whitelist_") isEqualTo 0) then {
+			private _teamName = _x select [10];
+			if !(_teamName in (_defaultTeams + ["Instructors"])) then {
+				private _whitelist = missionNamespace getVariable [_x, []];
+				if (_playerUID in _whitelist) exitWith {
+					_inWhitelist = true;
+				};
+			};
+		};
+	} forEach allVariables missionNamespace;
+
+	_result = _inWhitelist;
+}
+else
+{
+	if !(_team in _defaultTeams) then
+	{
+		private _whitelist = missionNamespace getVariable [format ["whitelist_%1", _team], []];
+		private _inWhitelist = _playerUID in _whitelist;
+
+		if (_inWhitelist) then {
+			_result = true;
+		} else {
+			_result = false;
+		};
 	} else {
-		_result = false;
+		_result = true;
 	};
-} else {
-	_result = true;
 };
 
 _result
