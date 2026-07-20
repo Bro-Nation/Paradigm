@@ -32,6 +32,7 @@ if (_minLifetime > para_s_cleanup_time_bucket_size) exitWith {
 	_bucket append _items;
 	para_s_cleanup_time_buckets set [_bucketKey, _bucket];
 	para_s_cleanup_time_bucket_times pushBackUnique _bucketKey;
+	para_s_cleanup_time_bucket_times sort true;
 };
 
 if (_minLifetime > -1) exitWith {

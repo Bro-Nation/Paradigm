@@ -20,6 +20,7 @@
 params ["_building", ["_updateObjects", true]];
 
 private _buildableConfig = [_building] call para_g_fnc_get_building_config;
+private _isComsTower = isClass (_buildableConfig >> "features" >> "coms_tower");
 
 private _objects = _building getVariable ["para_g_objects", []];
 if (_updateObjects) then
@@ -46,7 +47,11 @@ if (_isBaseStarter && _basesContaining isEqualTo []) then {
 };
 
 if !(_basesContaining isEqualTo []) then {
-	[_building, _basesContaining # 0] call para_s_fnc_building_connect_base;
+	// Keep coms towers on their own internal supply pool.
+	// This prevents DAC Cong coms towers from consuming FOB resources.
+	if (!_isComsTower) then {
+		[_building, _basesContaining # 0] call para_s_fnc_building_connect_base;
+	};
 };
 
 _building setVariable ["para_g_building_constructed", true, true];

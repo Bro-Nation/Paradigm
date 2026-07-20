@@ -85,6 +85,11 @@ if (count _wheelMenuEntries == 1) then
 	]
 };
 
+if ((count _wheelMenuEntries) > 10) then {
+	diag_log format ["[WheelMenu] Trimming entries from %1 to 10", count _wheelMenuEntries];
+	_wheelMenuEntries resize 10;
+};
+
 
 
 // close old menu
