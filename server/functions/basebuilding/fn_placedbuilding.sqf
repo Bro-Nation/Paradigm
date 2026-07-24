@@ -10,7 +10,7 @@
 		_object - Object [Object, defaults to objNull]
 		_buildableType - Object's classname [String, defaults to "" (empty string)]
 
-	Returns:	
+	Returns:
 		Building created [OBJECT]
 
 	Example(s): none
@@ -44,5 +44,9 @@ private _initialBuildProgress = 0;
 private _building = [_buildableType, _spawnInfo, _initialBuildProgress, _initialSupplies] call para_s_fnc_building_create;
 
 diag_log format ["Paradigm: Placed building %1 based on objects %2", _buildableType, _objects];
+
+if (_buildableType == "Land_vn_ttowersmall_2_f") then {
+	_building setVariable ["vn_mf_coms_tower_just_placed", true, true];
+};
 
 _building
