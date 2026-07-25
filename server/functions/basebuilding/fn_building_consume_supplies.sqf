@@ -27,7 +27,7 @@ if (isNil "_supplySource") exitWith {
 
 private _currentSupplies = _supplySource getVariable "para_g_current_supplies";
 
-private _enoughSupplies = _currentSupplies > _quantity;
+private _enoughSupplies = _currentSupplies >= _quantity;
 if (_enoughSupplies || _force) then {
 	_supplySource setVariable [
 		"para_g_current_supplies", 

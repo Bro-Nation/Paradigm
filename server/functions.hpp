@@ -116,6 +116,15 @@ class para_s
 		class bf_respawn_unregister_respawn {};
 	};
 
+	class building_features_coms_tower
+	{
+		PARA_SERVER_PATH(\building_features\coms_tower);
+		class bf_coms_tower_on_placed {};
+		class bf_coms_tower_on_functional {};
+		class bf_coms_tower_on_nonfunctional {};
+		class bf_coms_tower_register_killed_handlers {};
+	};
+
 	class building_features_supply_depot
 	{
 		PARA_SERVER_PATH(\building_features\supply_depot);

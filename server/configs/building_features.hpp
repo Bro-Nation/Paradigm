@@ -63,6 +63,15 @@ class CfgBuildingFeatures
 		onBuildingDeleted = "para_s_fnc_bf_respawn_on_deleted";
 	};
 
+	class coms_tower
+	{
+		canPlaceBuilding = "para_g_fnc_bf_coms_tower_can_place_building";
+		onBuildingPlaced = "para_s_fnc_bf_coms_tower_on_placed";
+		onBuildingObjectsChanged = "para_s_fnc_bf_coms_tower_register_killed_handlers";
+		onBuildingFunctional = "para_s_fnc_bf_coms_tower_on_functional";
+		onBuildingNonFunctional = "para_s_fnc_bf_coms_tower_on_nonfunctional";
+	};
+
 	class supply_depot
 	{
 		onBaseConnected = "para_s_fnc_bf_supply_depot_on_base_connected";

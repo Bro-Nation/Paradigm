@@ -74,6 +74,12 @@ class para_g
 		class bf_veh_spawn_can_place_building {};
 	};
 
+	class building_features_coms_tower
+	{
+		PARA_GLOBAL_PATH(\building_features\coms_tower);
+		class bf_coms_tower_can_place_building {};
+	};
+
 	class building_features_wreck_recovery
 	{
 		PARA_GLOBAL_PATH(\building_features\wreck_recovery);

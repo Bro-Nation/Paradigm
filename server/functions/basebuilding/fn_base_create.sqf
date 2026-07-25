@@ -74,7 +74,11 @@ publicVariable "para_g_bases";
 //Base created, now claim any unclaimed nearby buildings
 {
     if !(_x getVariable ["para_g_base", objNull] isEqualTo _base) then {
-        [_x, _base] call para_s_fnc_building_connect_base;
+        private _cfg = [_x] call para_g_fnc_get_building_config;
+        private _isComsTower = isClass (_cfg >> "features" >> "coms_tower");
+        if (!_isComsTower) then {
+            [_x, _base] call para_s_fnc_building_connect_base;
+        };
     };
 } forEach (para_l_buildings inAreaArray [_pos, _baseRadius, _baseRadius]);
 
