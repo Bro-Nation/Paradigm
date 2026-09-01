@@ -17,14 +17,15 @@
 
 params ["_buildingConfig", "_object"];
 
-if !(markerExists "activeZoneCircle") exitWith {[true, ""]};
+private _aoMarker = ["activeDefendCircle", "activeZoneCircle"] select ("activeZoneCircle" in allMapMarkers);
+if !(_aoMarker in allMapMarkers) exitWith {[true, ""]};
 
 if (missionNamespace getVariable ["vn_mf_coms_tower_destroyed_in_ao", false]) exitWith {
     [false, localize "STR_vn_mf_buildingMenu_condition_comsTowerNotDestroyedInAO"]
 };
 
-private _center = markerPos "activeZoneCircle";
-private _radius = selectMax ((getMarkerSize "activeZoneCircle") apply {abs _x});
+private _center = markerPos _aoMarker;
+private _radius = selectMax ((getMarkerSize _aoMarker) apply {abs _x});
 
 private _existingTowers = (nearestObjects [
     _center,
