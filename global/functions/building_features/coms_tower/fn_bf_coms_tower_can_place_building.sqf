@@ -17,7 +17,8 @@
 
 params ["_buildingConfig", "_object"];
 
-private _aoMarker = ["activeDefendCircle", "activeZoneCircle"] select ("activeZoneCircle" in allMapMarkers);
+private _activeZones = missionNamespace getVariable ["mf_g_dir_activeZoneNames", []];
+private _aoMarker = _activeZones param [0, ""];
 if !(_aoMarker in allMapMarkers) exitWith {[true, ""]};
 
 if (missionNamespace getVariable ["vn_mf_coms_tower_destroyed_in_ao", false]) exitWith {
@@ -25,7 +26,7 @@ if (missionNamespace getVariable ["vn_mf_coms_tower_destroyed_in_ao", false]) ex
 };
 
 private _center = markerPos _aoMarker;
-private _radius = selectMax ((getMarkerSize _aoMarker) apply {abs _x});
+private _radius = getNumber (missionConfigFile >> "map_config" >> "bn_zone_radius") + 100;
 
 private _existingTowers = (nearestObjects [
     _center,
