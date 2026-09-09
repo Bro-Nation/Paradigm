@@ -18,6 +18,10 @@
 
 params ["_buildingObject"];
 
+// Building state changes can replay stacked JIP calls for the same object.
+if (_buildingObject getVariable ["para_c_bf_veh_spawn_actions_added", false]) exitWith {};
+_buildingObject setVariable ["para_c_bf_veh_spawn_actions_added", true];
+
 //This *must* be defined, as the server will only use valid buildings.
 private _building = _buildingObject getVariable "para_g_building";
 private _buildingConfig = [_building] call para_g_fnc_get_building_config;
