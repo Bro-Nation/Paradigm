@@ -36,6 +36,15 @@ private _variables = {
 	private _buildingIsDecaying = [_building] call para_g_fnc_building_is_decaying;
 	private _statusText = localize (["STR_para_overlay_good", "STR_para_overlay_decaying"] select _buildingIsDecaying);
 	private _color = ['<t color="#00ce45">%1</t>', '<t color="#e77000">%1</t>'] select _buildingIsDecaying;
+	if (_buildingIsDecaying) then {
+		private _endsAt = _building getVariable ["para_g_decay_ends_at", -1];
+		if (_endsAt >= 0) then {
+			private _remaining = (_endsAt - serverTime) max 0;
+			private _mins = floor (_remaining / 60);
+			private _secs = floor (_remaining mod 60);
+			_statusText = format ["%1 — gone in %2:%3", _statusText, _mins, if (_secs < 10) then {"0" + str _secs} else {str _secs}];
+		};
+	};
 	private _status = format [localize "STR_para_overlay_buildable_status", format [_color, _statusText]];
 
 	if (_buildProgress < 1) exitWith {
