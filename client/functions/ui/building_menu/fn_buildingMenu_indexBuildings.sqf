@@ -24,15 +24,20 @@ private _nvaBuildables = _buildables select {
 	"nv" in _categories
 };
 
+private _bothBuildables = _buildables select {
+	private _categories = getArray (_x >> "categories");
+	"both" in _categories
+};
+
 private _mpBuildables = _buildables select {
 	private _categories = (getArray (_x >> "categories")) apply {toLower _x};
 	"mp" in _categories
 };
 
 if (_playerSide == east) then {
-	_buildables = _nvaBuildables;
+	_buildables = _nvaBuildables + _bothBuildables;
 } else {
-	_buildables = _buildables - _nvaBuildables;
+	_buildables = (_buildables - _nvaBuildables) + _bothBuildables;
 };
 
 if !(_isMilitaryPolice) then {
