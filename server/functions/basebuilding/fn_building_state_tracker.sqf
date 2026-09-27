@@ -36,29 +36,17 @@ para_l_buildings = para_l_buildings - [objNull];
 	} else {
 
 		if ([_building] call para_g_fnc_building_is_decaying) then {
-			//Buildings don't decay while players are nearby, otherwise we get things like cover vanishing mid-firefight
-			//COMMENT: REMOVED CHECKING FOR PLAYERS AT REQUEST OF PLAYERS
-			//if (allPlayers inAreaArray [getPos (_objects select 0), 100, 100, 0, false] isEqualTo []) then {
-				//Check if a building is part of a base. If not, allow building decay to start, else decay base first.
-				_base = _building getVariable ["para_g_base", objNull];
-				private _buildableConfig = [_building] call para_g_fnc_get_building_config;
-				private _isBaseStarter = isClass (_buildableConfig >> "features" >> "base_starter");
-				if (isNil str(_base) && !_isBaseStarter) then {
-					// (random 1 > 0.965) Aiming for a 50% chance to have vanished within 20 minutes after the base has despawned, given this script runs once a minute.
-					// (random 1 > 0.75) Aiming for a 50% chance to have vanished within 2 minutes after the base has despawned, given this script runs once a minute.
-					if (random 1 > 0.965) then {
-						[_building] call para_s_fnc_building_delete;
-					};
-				} else {
-					// (random 1 > 0.965) Aiming for a 50% chance to have vanished within 20 minutes, given this script runs once a minute. Keeping both if statements to allow for tuning.
-					// (random 1 > 0.75) Aiming for a 50% chance to have vanished within 2 minutes, given this script runs once a minute. Keeping both if statements to allow for tuning.
-					if (random 1 > 0.965) then {
-						//Delete base and "base starter(s)" at the same time
-						[_building] call para_s_fnc_building_delete;
-						[_base] call para_s_fnc_base_delete;
-					};
-				};
-			//};
+			private _endsAt = _building getVariable ["para_g_decay_ends_at", -1];
+			if (_endsAt < 0) then {
+				private _duration = missionNamespace getVariable ["para_g_building_decay_duration", 5 * 60];
+				_endsAt = serverTime + _duration;
+				_building setVariable ["para_g_decay_started_at", serverTime, true];
+				_building setVariable ["para_g_decay_ends_at", _endsAt, true];
+			};
+
+			if (serverTime >= _endsAt) then {
+				[_building] call para_s_fnc_building_delete;
+			};
 		}
 		else
 		{

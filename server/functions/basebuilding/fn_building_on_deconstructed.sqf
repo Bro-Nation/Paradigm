@@ -42,5 +42,19 @@ if (_objectIndexInTypeList > -1) then {
 	_typeList deleteAt _objectIndexInTypeList;
 };
 
+private _base = _building getVariable ["para_g_base", objNull];
 [_building] call para_s_fnc_building_disconnect_base;
 //TODO - Delete base if core building is removed.
+private _isBaseStarter = isClass (_buildableConfig >> "features" >> "base_starter");
+if (_isBaseStarter && !isNull _base) then {
+	private _remainingStarters = (_base getVariable ["para_g_buildings", []]) select {
+		if (isNull _x) exitWith {false};
+		if !(_x getVariable ["para_g_building_constructed", false]) exitWith {false};
+		private _cfg = [_x] call para_g_fnc_get_building_config;
+		isClass (_cfg >> "features" >> "base_starter")
+	};
+
+	if (_remainingStarters isEqualTo []) then {
+		[_base] call para_s_fnc_base_delete;
+	};
+};

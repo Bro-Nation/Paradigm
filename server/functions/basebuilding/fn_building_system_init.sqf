@@ -19,6 +19,9 @@
 para_g_max_base_radius = 250;
 publicVariable "para_g_max_base_radius";
 
+para_g_building_decay_duration = 5 * 60;
+publicVariable "para_g_building_decay_duration";
+
 // init buildables type arrays
 private _buildables_config = (_gamemode_config >> "buildables");
 private _classes = "isClass _x" configClasses (_buildables_config);

@@ -33,6 +33,24 @@ para_l_buildings = para_l_buildings - [_building];
 //Disconnect from supply source.
 [_building] call para_s_fnc_building_disconnect_supply_source;
 
+private _base = _building getVariable ["para_g_base", objNull];
+if !(_base isEqualTo objNull) then {
+	[_building] call para_s_fnc_building_disconnect_base;
+	private _buildableConfig = [_building] call para_g_fnc_get_building_config;
+	private _isBaseStarter = isClass (_buildableConfig >> "features" >> "base_starter");
+	if (_isBaseStarter) then {
+		private _remainingStarters = (_base getVariable ["para_g_buildings", []]) select {
+			if (isNull _x) exitWith {false};
+			if !(_x getVariable ["para_g_building_constructed", false]) exitWith {false};
+			private _cfg = [_x] call para_g_fnc_get_building_config;
+			isClass (_cfg >> "features" >> "base_starter")
+		};
+		if (_remainingStarters isEqualTo []) then {
+			[_base] call para_s_fnc_base_delete;
+		};
+	};
+};
+
 {
 	deleteVehicle _x;
 } forEach (_building getVariable ["para_g_objects", []]);

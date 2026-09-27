@@ -31,10 +31,17 @@ if (_functional != _previouslyFunctional) then
 {
     if (_functional) then
     {
+        _building setVariable ["para_g_decay_started_at", nil, true];
+        _building setVariable ["para_g_decay_ends_at", nil, true];
         [_building] call para_s_fnc_building_on_functional;
     } 
     else
     {
+        private _duration = missionNamespace getVariable ["para_g_building_decay_duration", 5 * 60];
+        if (isNil {_building getVariable "para_g_decay_ends_at"}) then {
+            _building setVariable ["para_g_decay_started_at", serverTime, true];
+            _building setVariable ["para_g_decay_ends_at", serverTime + _duration, true];
+        };
         [_building] call para_s_fnc_building_on_non_functional;
     };
 
