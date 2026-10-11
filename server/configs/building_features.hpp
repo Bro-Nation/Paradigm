@@ -63,6 +63,14 @@ class CfgBuildingFeatures
 		onBuildingDeleted = "para_s_fnc_bf_respawn_on_deleted";
 	};
 
+	class no_harass_zone
+	{
+		onBuildingFunctional = "para_s_fnc_bf_no_harass_zone_on_functional";
+		onBuildingNonFunctional = "para_s_fnc_bf_no_harass_zone_on_nonfunctional";
+		onBuildingDestroyed = "para_s_fnc_bf_no_harass_zone_on_deleted";
+		onBuildingDeleted = "para_s_fnc_bf_no_harass_zone_on_deleted";
+	};
+
 	class coms_tower
 	{
 		canPlaceBuilding = "para_g_fnc_bf_coms_tower_can_place_building";
