@@ -116,6 +116,15 @@ class para_s
 		class bf_respawn_unregister_respawn {};
 	};
 
+	class building_features_no_harass_zone
+	{
+		PARA_SERVER_PATH(\building_features\no_harass_zone);
+		class bf_no_harass_zone_cleanup {};
+		class bf_no_harass_zone_on_functional {};
+		class bf_no_harass_zone_on_nonfunctional {};
+		class bf_no_harass_zone_on_deleted {};
+	};
+
 	class building_features_coms_tower
 	{
 		PARA_SERVER_PATH(\building_features\coms_tower);

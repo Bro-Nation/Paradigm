@@ -18,6 +18,7 @@ private _config = missionConfigFile >> "gamemode" >> "buildables";
 private _buildables = "true" configClasses _config;
 private _playerSide = side player;
 private _isMilitaryPolice = player getVariable ["vn_mf_db_player_group", "MikeForce"] isEqualTo "MilitaryPolice";
+private _isQuarterHorse = player getVariable ["vn_mf_db_player_group", "MikeForce"] isEqualTo "QuarterHorse";
 
 private _nvaBuildables = _buildables select { 
 	private _categories = getArray (_x >> "categories");
@@ -34,6 +35,11 @@ private _mpBuildables = _buildables select {
 	"mp" in _categories
 };
 
+private _qhBuildables = _buildables select {
+	private _categories = (getArray (_x >> "categories")) apply {toLower _x};
+	"qh" in _categories
+};
+
 if (_playerSide == east) then {
 	_buildables = _nvaBuildables + _bothBuildables;
 } else {
@@ -42,6 +48,10 @@ if (_playerSide == east) then {
 
 if !(_isMilitaryPolice) then {
 	_buildables = _buildables - _mpBuildables;
+};
+
+if !(_isQuarterHorse) then {
+	_buildables = _buildables - _qhBuildables;
 };
 
 private _name = "";
@@ -55,9 +65,12 @@ private _processed = _buildables apply {
 		_localizedName = _name call para_c_fnc_localize;
 	};
 
+	private _categories = (getArray (_x >> "categories")) apply { toLower _x };
+	_categories = _categories - ["qh"];
+
 	_return = [
 		_x,
-		(getArray (_x >> "categories")) apply { toLower _x },
+		_categories,
 		_localizedName,
 		[getText (configFile >> "CfgVehicles" >> (configName _x) >> "editorPreview"), (getText (_x >> "picture"))] select !((getText (_x >> "picture")) isEqualTo ""),
 		configName _x,

@@ -53,7 +53,7 @@ _hqMarker setMarkerText _baseName;
 
 _baseMarkerName = "base_" + _basename;
 _baseMarker = createMarkerLocal [_baseMarkerName, _base];
-_baseMarker setMarkerSizeLocal [250, 250];
+_baseMarker setMarkerSizeLocal [_baseRadius, _baseRadius];
 _baseMarker setMarkerShapeLocal "ELLIPSE";
 _baseMarker setMarkerAlphaLocal 0.25;
 // Set color and send to clients

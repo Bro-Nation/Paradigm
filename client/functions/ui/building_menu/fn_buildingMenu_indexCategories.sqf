@@ -67,7 +67,8 @@ if (isNil "para_c_buildingMenu_features") then
 	private _features = [];
 	{
 		{
-			if (_x != "invulnerable") then {
+			//This filters out any features that are not in the allowed to make a category in the biuld menu
+			if !(_x in ["invulnerable", "no_harass_zone"]) then {
 				_features pushBackUnique _x;
 			};
 		} forEach (_x select 5);
