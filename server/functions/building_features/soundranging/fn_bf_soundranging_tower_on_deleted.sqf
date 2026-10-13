@@ -1,0 +1,17 @@
+/*
+	File: fn_bf_soundranging_tower_on_deleted.sqf
+	Author: Tylervip
+	Public: No
+
+	Description:
+		Unregisters a sound-ranging tower when the building is deleted.
+
+	Parameter(s):
+		_building - Building that was deleted [OBJECT]
+
+	Returns:
+		Nothing
+*/
+params [["_building", objNull, [objNull]]];
+
+[_building] call para_s_fnc_bf_soundranging_tower_on_nonfunctional;
