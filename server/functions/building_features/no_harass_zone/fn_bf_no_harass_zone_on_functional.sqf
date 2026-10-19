@@ -46,5 +46,12 @@ _building setVariable ["para_s_no_harass_marker", _markerName, true];
 if (isNil "vn_mf_markers_no_harass") then {
 	vn_mf_markers_no_harass = [];
 };
+if (isNil "vn_mf_markers_fsb") then {
+	vn_mf_markers_fsb = [];
+};
+
 vn_mf_markers_no_harass pushBackUnique _markerName;
 publicVariable "vn_mf_markers_no_harass";
+
+vn_mf_markers_fsb pushBackUnique _markerName;
+publicVariable "vn_mf_markers_fsb";
