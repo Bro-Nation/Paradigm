@@ -32,7 +32,7 @@ if (_radius <= 0) then {
 };
 
 private _id = _building getVariable ["para_s_building_id", round random 99999];
-private _markerName = format ["no_harass_bh_%1", _id];
+private _markerName = format ["FSB_bh_%1", _id];
 
 createMarker [_markerName, getPosATL _flag];
 _markerName setMarkerShape "ELLIPSE";

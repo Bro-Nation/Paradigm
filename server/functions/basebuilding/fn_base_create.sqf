@@ -19,7 +19,7 @@
     Example(s):
         [parameter] call vn_fnc_myFunction
 */
-params ["_pos", "_baseName", ["_baseRadius", para_g_max_base_radius], ["_initialSupplies", 0], "_id"];
+params ["_pos", "_baseName", ["_baseRadius", para_g_max_base_radius], ["_initialSupplies", 0], ["_id", nil], ["_baseNamePrefix", ""]];
 
 if (isNil "_id") then
 {
@@ -40,6 +40,9 @@ if (isNil "_baseName") then
     private _number = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
     private _phoenetic = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Indigo", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Siera", "Tango", "Uniform", "Victor", "Whisky", "Xray", "Yankee", "Zulu"];
     _baseName = selectRandom _phoenetic + "-" + selectRandom _number + selectRandom _number;
+    if !(_baseNamePrefix isEqualTo "") then {
+        _baseName = format ["%1 %2", _baseNamePrefix, _baseName];
+    };
 };
 _base setVariable ["para_g_base_name", _baseName, true];
 

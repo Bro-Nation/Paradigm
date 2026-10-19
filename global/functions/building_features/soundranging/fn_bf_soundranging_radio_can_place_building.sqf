@@ -21,7 +21,7 @@ if (isNull _object) exitWith {
 
 private _fsbMarkers = missionNamespace getVariable ["vn_mf_markers_no_harass", []];
 private _fsbIndex = _fsbMarkers findIf {
-	(_x find "no_harass_bh_" isEqualTo 0) && {_object inArea _x}
+	((_x find "FSB_bh_" isEqualTo 0) || {(_x find "no_harass_bh_" isEqualTo 0)}) && {_object inArea _x}
 };
 
 if (_fsbIndex < 0) exitWith {

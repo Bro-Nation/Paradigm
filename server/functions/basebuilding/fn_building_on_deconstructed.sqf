@@ -44,10 +44,17 @@ if (_objectIndexInTypeList > -1) then {
 
 private _base = _building getVariable ["para_g_base", objNull];
 [_building] call para_s_fnc_building_disconnect_base;
-//TODO - Delete base if core building is removed.
 private _isBaseStarter = isClass (_buildableConfig >> "features" >> "base_starter");
-if (_isBaseStarter && !isNull _base) then {
-	private _remainingStarters = (_base getVariable ["para_g_buildings", []]) select {
+if (_isBaseStarter && {!isNull _base}) then {
+	private _candidateStarters = (_base getVariable ["para_g_buildings", []]) + (
+		para_l_buildings select {
+			!isNull _x &&
+			{_x isNotEqualTo _building} &&
+			{(_x getVariable ["para_g_base", objNull]) isEqualTo _base} &&
+			{isClass ([_x] call para_g_fnc_get_building_config >> "features" >> "base_starter")}
+		}
+	);
+	private _remainingStarters = _candidateStarters select {
 		if (isNull _x) exitWith {false};
 		if !(_x getVariable ["para_g_building_constructed", false]) exitWith {false};
 		private _cfg = [_x] call para_g_fnc_get_building_config;

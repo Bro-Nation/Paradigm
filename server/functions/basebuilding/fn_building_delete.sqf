@@ -20,6 +20,9 @@
 
 params ["_building"];
 
+if (_building getVariable ["para_s_building_deleting", false]) exitWith {};
+_building setVariable ["para_s_building_deleting", true, true];
+
 //Dismantle the building, don't bother updating the objects as they'll be deleted.
 //This handles calling NonFunctional, as non-built buildings are non-functional.
 //NonFunctional MUST BE CALLED.
@@ -39,7 +42,15 @@ if !(_base isEqualTo objNull) then {
 	private _buildableConfig = [_building] call para_g_fnc_get_building_config;
 	private _isBaseStarter = isClass (_buildableConfig >> "features" >> "base_starter");
 	if (_isBaseStarter) then {
-		private _remainingStarters = (_base getVariable ["para_g_buildings", []]) select {
+		private _candidateStarters = (_base getVariable ["para_g_buildings", []]) + (
+			para_l_buildings select {
+				!isNull _x &&
+				{_x isNotEqualTo _building} &&
+				{(_x getVariable ["para_g_base", objNull]) isEqualTo _base} &&
+				{isClass ([_x] call para_g_fnc_get_building_config >> "features" >> "base_starter")}
+			}
+		);
+		private _remainingStarters = _candidateStarters select {
 			if (isNull _x) exitWith {false};
 			if !(_x getVariable ["para_g_building_constructed", false]) exitWith {false};
 			private _cfg = [_x] call para_g_fnc_get_building_config;
