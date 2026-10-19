@@ -81,6 +81,7 @@ class CfgBuildingFeatures
 
 	class soundranging_radio
 	{
+		canPlaceBuilding = "para_g_fnc_bf_soundranging_radio_can_place_building";
 		onBuildingFunctional = "para_s_fnc_bf_soundranging_radio_on_functional";
 	};
 

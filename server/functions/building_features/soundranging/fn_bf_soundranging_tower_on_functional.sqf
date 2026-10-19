@@ -27,4 +27,14 @@ private _towers = missionNamespace getVariable ["vn_mf_soundranging_towers", []]
 _towers pushBackUnique _building;
 missionNamespace setVariable ["vn_mf_soundranging_towers", _towers];
 
+// Global marker persists until the building is removed (see tower_on_deleted)
+private _markerName = format ["vn_mf_sr_tower_%1", netId _building];
+if (markerType _markerName isEqualTo "") then {
+	private _tower = (_building getVariable ["para_g_objects", []]) param [0, _building];
+	createMarker [_markerName, getPosATL _tower];
+	_markerName setMarkerType "loc_Transmitter";
+	_markerName setMarkerColor "ColorOrange";
+	_markerName setMarkerText "";
+};
+
 diag_log format ["[Sound Ranging] Registered tower %1", _building];

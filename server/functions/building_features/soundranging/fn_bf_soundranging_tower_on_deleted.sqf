@@ -14,4 +14,7 @@
 */
 params [["_building", objNull, [objNull]]];
 
+if (!isServer) exitWith {};
+
+deleteMarker format ["vn_mf_sr_tower_%1", netId _building];
 [_building] call para_s_fnc_bf_soundranging_tower_on_nonfunctional;
