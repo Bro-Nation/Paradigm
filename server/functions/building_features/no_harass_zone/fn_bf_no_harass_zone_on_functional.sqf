@@ -22,7 +22,8 @@ private _flag = _objects param [0, objNull];
 if (isNull _flag) exitWith {};
 
 _flag setFlagAnimationPhase 1;
-_flag setFlagTexture "custom\billboards\Blackhorse_bb.paa";
+//I give up TODO figure out how to set flag texture on the server
+//_flag setFlagTexture "custom\billboards\Blackhorse_bb.paa";
 
 
 private _cfg = [_building] call para_g_fnc_get_building_config;
@@ -32,7 +33,7 @@ if (_radius <= 0) then {
 };
 
 private _id = _building getVariable ["para_s_building_id", round random 99999];
-private _markerName = format ["no_harass_bh_%1", _id];
+private _markerName = format ["FSB_bh_%1", _id];
 
 createMarker [_markerName, getPosATL _flag];
 _markerName setMarkerShape "ELLIPSE";
@@ -46,5 +47,12 @@ _building setVariable ["para_s_no_harass_marker", _markerName, true];
 if (isNil "vn_mf_markers_no_harass") then {
 	vn_mf_markers_no_harass = [];
 };
+if (isNil "vn_mf_markers_fsb") then {
+	vn_mf_markers_fsb = [];
+};
+
 vn_mf_markers_no_harass pushBackUnique _markerName;
 publicVariable "vn_mf_markers_no_harass";
+
+vn_mf_markers_fsb pushBackUnique _markerName;
+publicVariable "vn_mf_markers_fsb";

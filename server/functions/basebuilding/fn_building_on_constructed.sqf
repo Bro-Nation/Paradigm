@@ -45,7 +45,12 @@ if (_isBaseStarter && _basesContaining isEqualTo []) then {
 	// Optional per-building override of the base radius, defaults to para_g_max_base_radius.
 	private _starterRadius = getNumber (_buildableConfig >> "features" >> "base_starter" >> "radius");
 	if (_starterRadius <= 0) then { _starterRadius = para_g_max_base_radius; };
-	private _base = [getPos _building, nil, _starterRadius] call para_s_fnc_base_create;
+	private _baseNamePrefix = "";
+	private _buildableName = toUpper getText (_buildableConfig >> "name");
+	if ((_buildableName find "FIRE SUPPORT BASE" >= 0) || {(_buildableName find "FSB") >= 0}) then {
+		_baseNamePrefix = "FSB";
+	};
+	private _base = [getPos _building, nil, _starterRadius, 0, nil, _baseNamePrefix] call para_s_fnc_base_create;
 	_basesContaining pushBack _base;
 };
 

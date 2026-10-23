@@ -74,6 +74,12 @@ class para_g
 		class bf_veh_spawn_can_place_building {};
 	};
 
+	class building_features_soundranging
+	{
+		PARA_GLOBAL_PATH(\building_features\soundranging);
+		class bf_soundranging_radio_can_place_building {};
+	};
+
 	class building_features_coms_tower
 	{
 		PARA_GLOBAL_PATH(\building_features\coms_tower);

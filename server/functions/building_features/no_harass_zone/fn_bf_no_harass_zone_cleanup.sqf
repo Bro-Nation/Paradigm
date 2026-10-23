@@ -24,4 +24,9 @@ if !(isNil "vn_mf_markers_no_harass") then {
 	publicVariable "vn_mf_markers_no_harass";
 };
 
+if !(isNil "vn_mf_markers_fsb") then {
+	vn_mf_markers_fsb = vn_mf_markers_fsb - [_markerName];
+	publicVariable "vn_mf_markers_fsb";
+};
+
 _building setVariable ["para_s_no_harass_marker", nil, true];

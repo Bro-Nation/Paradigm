@@ -67,6 +67,8 @@ private _processed = _buildables apply {
 
 	private _categories = (getArray (_x >> "categories")) apply { toLower _x };
 	_categories = _categories - ["qh"];
+	private _features = "true" configClasses (_x >> "features") apply {configName _x};
+	_features = _features - ["soundranging_radio", "soundranging_tower"];
 
 	_return = [
 		_x,
@@ -74,7 +76,7 @@ private _processed = _buildables apply {
 		_localizedName,
 		[getText (configFile >> "CfgVehicles" >> (configName _x) >> "editorPreview"), (getText (_x >> "picture"))] select !((getText (_x >> "picture")) isEqualTo ""),
 		configName _x,
-		"true" configClasses (_x >> "features") apply {configName _x}
+		_features
 	];
 	_return
 };

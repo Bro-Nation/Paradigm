@@ -25,3 +25,16 @@ _basebuildingData params ["_bases", "_buildings"];
 
 _bases apply {[_x] call para_s_fnc_base_deserialize};
 _buildings apply {[_x] call para_s_fnc_building_deserialize};
+
+{
+	private _base = _x;
+	private _validBaseBuildings = para_l_buildings select {
+		!isNull _x &&
+		{(_x getVariable ["para_g_base", objNull]) isEqualTo _base} &&
+		{_x getVariable ["para_g_building_constructed", false]}
+	};
+
+	if (_validBaseBuildings isEqualTo []) then {
+		[_base] call para_s_fnc_base_delete;
+	};
+} forEach (+para_g_bases);

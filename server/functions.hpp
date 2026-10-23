@@ -125,6 +125,15 @@ class para_s
 		class bf_no_harass_zone_on_deleted {};
 	};
 
+	class building_features_soundranging
+	{
+		PARA_SERVER_PATH(\building_features\soundranging);
+		class bf_soundranging_tower_on_functional {};
+		class bf_soundranging_tower_on_nonfunctional {};
+		class bf_soundranging_tower_on_deleted {};
+		class bf_soundranging_radio_on_functional {};
+	};
+
 	class building_features_coms_tower
 	{
 		PARA_SERVER_PATH(\building_features\coms_tower);

@@ -39,7 +39,11 @@ para_c_fnc_zone_marker_mapEH = addMissionEventHandler ["Map", {
         private _markerKeyArray = keys para_c_zone_markers_map;
         //--- Find a zone marker where the mouse position currently is in
         private _markersAtPos = _markerKeyArray select {
-            _mouseMapPos inArea [getMarkerPos _x, getMarkerSize _x select 0, getMarkerSize _x select 1, 0, false]
+            private _lowerMarkerName = toLower _x;
+            private _isFsbBaseMarker = (_lowerMarkerName find "base_fsb") isEqualTo 0;
+            (!_isFsbBaseMarker || {markerAlpha _x > 0}) && {
+                _mouseMapPos inArea [getMarkerPos _x, getMarkerSize _x select 0, getMarkerSize _x select 1, 0, false]
+            }
         };
 
         if (count _markersAtPos != 0) then {
