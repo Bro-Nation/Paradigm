@@ -16,5 +16,8 @@ params [["_building", objNull, [objNull]]];
 
 if (!isServer) exitWith {};
 
-deleteMarker format ["vn_mf_sr_tower_%1", netId _building];
+private _markerName = format ["vn_mf_sr_tower_%1", netId _building];
+deleteMarker _markerName;
+missionNamespace setVariable [format ["vn_mf_sr_tower_side_%1", _markerName], nil];
+publicVariable (format ["vn_mf_sr_tower_side_%1", _markerName]);
 [_building] call para_s_fnc_bf_soundranging_tower_on_nonfunctional;

@@ -5,6 +5,7 @@
 
 	Description:
 		Registers a sound-ranging tower when the building becomes functional.
+			The tower marker is tagged for West visibility only.
 
 	Parameter(s):
 		_building - Building that became functional [OBJECT]
@@ -35,6 +36,8 @@ if (markerType _markerName isEqualTo "") then {
 	_markerName setMarkerType "loc_Transmitter";
 	_markerName setMarkerColor "ColorOrange";
 	_markerName setMarkerText "";
+	missionNamespace setVariable [format ["vn_mf_sr_tower_side_%1", _markerName], west];
+	publicVariable (format ["vn_mf_sr_tower_side_%1", _markerName]);
 };
 
 diag_log format ["[Sound Ranging] Registered tower %1", _building];
