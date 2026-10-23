@@ -22,7 +22,8 @@ private _flag = _objects param [0, objNull];
 if (isNull _flag) exitWith {};
 
 _flag setFlagAnimationPhase 1;
-_flag setFlagTexture "custom\billboards\Blackhorse_bb.paa";
+//I give up TODO figure out how to set flag texture on the server
+//_flag setFlagTexture "custom\billboards\Blackhorse_bb.paa";
 
 
 private _cfg = [_building] call para_g_fnc_get_building_config;
